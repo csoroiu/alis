@@ -1,0 +1,63 @@
+#!/bin/bash
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
+function comment_line ( )
+{
+    local pattern=$1
+    local file=$2
+    sed "/${pattern}/s/^/#/g" -i "${file}"
+}
+
+function uncomment_line ( )
+{
+    local pattern=$1
+    local file=$2
+    sed "/${pattern}/s/^#//g" -i "${file}"
+}
+
+if [[ $# -eq 0 ]]; then
+    echo "No arguments provided"
+    exit 1
+fi
+if [[ "$EUID" -ne 0 ]]
+  then echo "Please run as root"
+  exit
+fi
+
+device=$1
+
+echo ""
+echo Writing u-boot image
+dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
+sync -d /dev/sdd
+
+echo ""
+echo Mounting boot and root 
+mkdir boot
+mkdir root
+mount ${device}1 boot
+mount ${device}2 root
+
+echo ""
+echo "Unpacking the image"
+bsdtar -xpf ArchLinuxARM-odroid-xu-latest.tar.gz -C root
+mv root/boot/* boot
+
+echo ""
+echo "Patching files"
+cp -a boot/boot.ini boot/boot.ini.bak
+#comment_line "setenv fdt_high" boot/boot.ini
+sed -e 's/0x41f00000/0x4fff2000/g' -i boot/boot.ini
+
+cp -a root/etc/locale.gen root/etc/locale.gen.bak
+uncomment_line "^#en_US" root/etc/locale.gen
+cp -a root/etc/hostname root/etc/hostname.bak
+sed -e 's/alarm/odroid/' -i root/etc/hostname
+
+cp -r "${PROGDIR}/alarm/" root/root
+
+echo ""
+echo Unmounting
+umount boot root

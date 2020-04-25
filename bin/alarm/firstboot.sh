@@ -1,0 +1,10 @@
+#!/bin/bash
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
+"${PROGDIR}/prepare-update-system.sh"
+"${PROGDIR}/install-yay.sh"
+deploy_user=alarm
+sudo -H -u ${deploy_user} "${PROGDIR}/alarm-user-settings.sh"
+
