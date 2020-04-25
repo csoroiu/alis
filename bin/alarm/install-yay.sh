@@ -15,5 +15,5 @@ cd yay-git
 #execute makepkg as user alarm
 sudo -H -u ${deploy_user} makepkg -si --noconfirm
 #cleanup unwanted dependencies
-sudo -H -u ${deploy_user} yay -Yc
+sudo -H -u ${deploy_user} yay -Yc --noconfirm
 popd

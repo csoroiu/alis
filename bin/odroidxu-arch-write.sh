@@ -31,7 +31,7 @@ device=$1
 echo ""
 echo Writing u-boot image
 dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
-sync -d /dev/sdd
+sync -d ${device}
 
 echo ""
 echo Mounting boot and root 
@@ -43,6 +43,7 @@ mount ${device}2 root
 echo ""
 echo "Unpacking the image"
 bsdtar -xpf ArchLinuxARM-odroid-xu-latest.tar.gz -C root
+sync -d ${device}
 mv root/boot/* boot
 
 echo ""
