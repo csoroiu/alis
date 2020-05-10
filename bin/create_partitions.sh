@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 readonly PROGNAME=$(basename $0)
 readonly PROGDIR=$(readlink -m $(dirname $0))
 readonly ARGS="$@"
@@ -8,7 +8,8 @@ function partition ( )
     local device=$1
     echo ""
     echo "Unmounting all partitions for ${device}" 
-    umount ${device}?*
+    #skip mount errors
+    umount ${device}?* || :
 #    echo Wiping out first 128MB for "${device}"
 #    dd if=/dev/zero of=${device} bs=1M count=128
     echo ""

@@ -6,7 +6,7 @@ readonly ARGS="$@"
 pacman-key --init
 pacman-key --populate archlinuxarm
 
-hostnamectl set-hostname odroid
+#hostnamectl set-hostname odroid
 timedatectl set-timezone Europe/Bucharest
 localectl set-locale LANG=en_US.UTF-8
 

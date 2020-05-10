@@ -6,5 +6,6 @@ readonly ARGS="$@"
 "${PROGDIR}/prepare-update-system.sh"
 "${PROGDIR}/install-yay.sh"
 deploy_user=alarm
-sudo -H -u ${deploy_user} "${PROGDIR}/alarm-user-settings.sh"
+cp -a "${PROGDIR}/alarm-user-settings.sh" /tmp
+sudo -H -u ${deploy_user} "/tmp/alarm-user-settings.sh"
 

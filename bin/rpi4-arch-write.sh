@@ -29,11 +29,6 @@ fi
 device=$1
 
 echo ""
-echo Writing u-boot image
-dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
-sync -d ${device}
-
-echo ""
 echo Mounting boot and root 
 mkdir boot
 mkdir root
@@ -42,24 +37,21 @@ mount ${device}2 root
 
 echo ""
 echo "Unpacking the image"
-bsdtar -xpf ArchLinuxARM-odroid-xu-latest.tar.gz -C root
+bsdtar -xpf ArchLinuxARM-rpi-4-latest.tar.gz -C root
 sync -d ${device}
 mv root/boot/* boot
 
 echo ""
 echo "Patching files"
-cp -a boot/boot.ini boot/boot.ini.original
-#comment_line "setenv fdt_high" boot/boot.ini
-sed -e 's/0x41f00000/0x4fff2000/g' -i boot/boot.ini
-
 cp -a root/etc/locale.gen root/etc/locale.gen.original
 uncomment_line "^#en_US" root/etc/locale.gen
 cp -a root/etc/pacman.conf root/etc/pacman.conf.original
 uncomment_line "^#Color" root/etc/pacman.conf
 cp -a root/etc/hostname root/etc/hostname.original
-sed -e 's/alarm/odroid/' -i root/etc/hostname
+echo alarmpi4 > root/etc/hostname
 
 cp -r "${PROGDIR}/alarm/" root/root
+cp -r "${PROGDIR}/raspberry" root/home/alarm/bin
 
 echo ""
 echo Unmounting

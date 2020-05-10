@@ -10,6 +10,6 @@ fi
 
 device=$1
 
-"${PROGDIR}/odroidxu-arch-get.sh"
+"${PROGDIR}/rpi4-arch-get.sh"
 sudo "${PROGDIR}/create_partitions.sh" ${device}
-sudo "${PROGDIR}/odroidxu-arch-write.sh" ${device}
+sudo "${PROGDIR}/rpi4-arch-write.sh" ${device}
