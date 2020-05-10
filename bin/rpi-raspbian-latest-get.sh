@@ -1,6 +1,6 @@
 #!/bin/bash -e
 readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS="$@"
 
 . $PROGDIR/download-functions.sh --source-only
@@ -13,13 +13,18 @@ fi
 distro="$1"
 
 #The mirror in greece does not answer with the file's timestamp
+
 image_url="$(get_arch_mirror https://downloads.raspberrypi.org/${distro})"
 echo ""
 download_if_newer "${image_url}"
 echo ""
 download_if_newer "${image_url}.sha256"
 
-image_name="${image_url##*/}"
+image_name="$(get_file_name_from_url ${image_url})"
+
 image_sha256="${image_name}.sha256"
 sha256sum -c "${image_sha256}" 
 
+
+ln -sfn "${image_name}" "${distro}.zip"
+ln -sfn "${image_name}.sha256" "${distro}.zip.sha256"

@@ -1,6 +1,6 @@
 #!/bin/bash -e
 readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS="$@"
 
 if [[ $# -eq 0 ]]; then
@@ -10,6 +10,6 @@ fi
 
 device=$1
 
-"${PROGDIR}/rpi3-arch-get.sh"
+"${PROGDIR}/rpi-arch-get.sh" rpi-2
 sudo "${PROGDIR}/create_partitions.sh" ${device}
 sudo "${PROGDIR}/rpi3-arch-write.sh" ${device}
