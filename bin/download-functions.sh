@@ -27,7 +27,7 @@ function download_if_newer ( )
 }
 
 function download_if_newer_arch ( )
-{   echo "Resolving $@"
+{
+    echo "Resolving $@"
     download_if_newer $(get_arch_mirror $@)
 }
-
