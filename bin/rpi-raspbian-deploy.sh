@@ -7,15 +7,19 @@ if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
-    echo " rpi-2: for 32bit rpi-2 and rpi-3"
-    echo " rpi-3: for 64bit rpi-3 (aarch64)"
-    echo " rpi-4: for 32bit rpi-4"
+    echo " raspbian_full_latest"
+    echo " raspbian_latest"
+    echo " raspbian_lite_latest"
     exit 1
 fi
 
 device="$1"
 distro="$2"
 
-"${PROGDIR}/rpi-arch-get.sh" ${distro}
-sudo "${PROGDIR}/create_partitions.sh" ${device}
-sudo "${PROGDIR}/rpi-arch-write.sh" ${device} ${distro}
+"${PROGDIR}/rpi-raspbian-get.sh" ${distro}
+
+echo ""
+echo "Unmounting all partitions for ${device}"
+sudo umount ${device}?* || :
+
+sudo "${PROGDIR}/rpi-raspbian-write.sh" ${device} ${distro}
