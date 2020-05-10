@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 readonly PROGNAME=$(basename $0)
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS="$@"
@@ -16,12 +16,15 @@ fi
 distro="$1"
 
 url=http://os.archlinuxarm.org/os/ArchLinuxARM-${distro}-latest.tar.gz
+file_name=ArchLinuxARM-${distro}-latest.tar.gz
 
 #The mirror in greece does not answer with the file's timestamp
 echo ""
 download_if_newer_arch ${url}
 echo ""
 download_if_newer_arch "${url}.md5"
-md5sum_filename="$(get_file_name_from_url ${url}.md5)"
-md5sum -c ${md5sum_filename}
+
+echo ""
+echo "Checking md5 sum"
+md5sum -c "${file_name}.md5"
 

@@ -30,8 +30,8 @@ if [[ $# -eq 0 ]]; then
     echo "No arguments provided"
     exit 1
 fi
-if [[ "$EUID" -ne 0 ]]
-  then echo "Please run as root"
+if [[ "$EUID" -ne 0 ]]; then
+  echo "Please run as root"
   exit
 fi
 device=$1
