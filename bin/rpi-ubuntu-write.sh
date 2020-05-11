@@ -21,9 +21,8 @@ if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
-    echo " raspbian_full_latest"
-    echo " raspbian_latest"
-    echo " raspbian_lite_latest"
+    echo " armhf: for rpi-2,3,4"
+    echo " arm64: for rpi-3,4"
     exit 1
 fi
 
@@ -35,14 +34,14 @@ fi
 device="$1"
 distro="$2"
 
-file_name=$(readlink -- "${distro}.zip")
+file_name="ubuntu-20.04-preinstalled-server-${distro}+raspi.img.xz"
 
 echo ""
 echo "Unpacking the image"
 #Image should have the same name as the zip but different extension
-image_name="$(basename ${file_name} .zip).img"
-#extract only that image file
-unzip -o ${file_name} ${image_name}
+image_name="$(basename ${file_name} .xz)"
+#extract the image file
+xz -k -f -d ${file_name}
 
 echo "Writing image on sd card"
 dd bs=4M if=${image_name} of=${device} conv=fsync
