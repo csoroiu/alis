@@ -25,7 +25,7 @@ image_sha256="${image_name}.sha256"
 
 echo ""
 echo "Checking sha256 sum"
-sha256sum -c "${image_sha256}" 
+grep "${file_name}" "${image_sha256}" | sha256sum -c
 
 old_file_name=$(readlink -- "${distro}.zip" || :)
 old_file_name_sha256=$(readlink -- "${distro}.zip.sha256" || :)

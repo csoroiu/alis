@@ -7,24 +7,24 @@ readonly ARGS="$@"
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name:"
-    echo " rpi-2: for 32bit rpi-2 and rpi-3"
-    echo " rpi-3: for 64bit rpi-3 (aarch64)"
-    echo " rpi-4: for 32bit rpi-4"
+    echo " RPi2: for rpi-2 and rpi-3"
+    echo " RPi4: for rpi-4"
     exit 1
 fi
 
 distro="$1"
 
-url=http://os.archlinuxarm.org/os/ArchLinuxARM-${distro}-latest.tar.gz
+url=http://releases.libreelec.tv/LibreELEC-${distro}.arm-9.2.1.img.gz
 file_name="$(get_file_name_from_url ${url})"
+image_sha256="${file_name}.sha256"
 
 #The mirror in greece does not answer with the file's timestamp
 echo ""
 download_if_newer_arch ${url}
 echo ""
-download_if_newer_arch "${url}.md5"
+download_if_newer_arch "${url}.sha256"
 
 echo ""
-echo "Checking md5 sum"
-md5sum -c "${file_name}.md5"
+echo "Checking sha256 sum"
+grep "${file_name}" "${image_sha256}" | sha256sum -c
 

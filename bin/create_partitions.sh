@@ -24,6 +24,11 @@ end
     echo Creating and formating the filesystems
     mkfs.vfat ${device}1
     mkfs.ext4 -F ${device}2
+    # notify kernel to re-read the partition table
+    # partprobe ${device}
+    # partx -u ${device}
+    # blockdev --rereadpt -v ${device}
+    hdparm -z ${device}
 }
 
 if [[ $# -eq 0 ]]; then
