@@ -10,8 +10,8 @@ function partition ( )
     echo "Unmounting all partitions for ${device}" 
     #skip mount errors
     umount ${device}?* || :
-#    echo Wiping out first 128MB for "${device}"
-#    dd if=/dev/zero of=${device} bs=1M count=128
+    #echo Wiping out first 128MB for "${device}"
+    #dd if=/dev/zero of=${device} bs=1M count=128 status=progress
     echo ""
     echo Creating partitions for "${device}"
     sfdisk --delete ${device}
@@ -22,8 +22,8 @@ end
 
     echo ""
     echo Creating and formating the filesystems
-    mkfs.vfat ${device}1
-    mkfs.ext4 -F ${device}2
+    mkfs.vfat -F 32 ${device}1
+    mkfs.ext4 -O ^huge_file -F ${device}2
     # notify kernel to re-read the partition table
     # partprobe ${device}
     # partx -u ${device}

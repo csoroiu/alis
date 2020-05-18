@@ -41,10 +41,10 @@ echo "Unpacking the image"
 #Image should have the same name as the zip but different extension
 image_name="$(basename ${file_name} .xz)"
 #extract the image file
-xz -k -f -d ${file_name}
+xz -k -v -f -d ${file_name}
 
 echo "Writing image on sd card"
-dd bs=4M if=${image_name} of=${device} conv=fsync
+dd bs=4M if=${image_name} of=${device} conv=fsync status=progress
 sync -d ${device}
 
 echo ""

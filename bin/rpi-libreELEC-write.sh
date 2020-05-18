@@ -44,7 +44,7 @@ image_name="$(basename ${file_name} .gz)"
 gzip -k -f -d ${file_name}
 
 echo "Writing image on sd card"
-dd bs=4M if=${image_name} of=${device} conv=fsync
+dd bs=4M if=${image_name} of=${device} conv=fsync status=progress
 sync -d ${device}
 
 echo ""

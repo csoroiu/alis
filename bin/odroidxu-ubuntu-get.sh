@@ -10,10 +10,6 @@ readonly ARGS="$@"
 echo ""
 download_if_newer http://s3.armhf.com/dist/odroid/odroidxu-uboot.img
 
-#downloading the complete image with ubuntu 14.04
-#xz -k -d ubuntu-14.04lts-server-odroid-xu-20140714.img.xz
-#dd if=/dev/zero of=${device} bs=1M
-#dd if=ubuntu-14.04lts-server-odroid-xu-20140714.img of=${device} bs=1M
 echo ""
 download_if_newer https://odroid.in/ubuntu_14.04lts/ubuntu-14.04lts-server-odroid-xu-20140714.img.xz
 echo ""

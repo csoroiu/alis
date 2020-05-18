@@ -13,6 +13,12 @@ localectl set-locale LANG=en_US.UTF-8
 pacman -Syu --noconfirm
 pacman -S --noconfirm docker htop sudo vim wget
 pacman -S --noconfirm community/tmux community/perf
+pacman -S --noconfirm bash-completion
+#pacman -S --noconfirm playerctl
+pacman -S --noconfirm usbutils
+#device tree compiler
+pacman -S --noconfirm dtc
+
 
 #request password for sudo operations
 echo 'alarm ALL=NOPASSWD: ALL' >/etc/sudoers.d/user-alarm

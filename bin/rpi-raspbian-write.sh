@@ -45,7 +45,7 @@ image_name="$(basename ${file_name} .zip).img"
 unzip -o ${file_name} ${image_name}
 
 echo "Writing image on sd card"
-dd bs=4M if=${image_name} of=${device} conv=fsync
+dd bs=4M if=${image_name} of=${device} conv=fsync status=progress
 sync -d ${device}
 
 echo ""
