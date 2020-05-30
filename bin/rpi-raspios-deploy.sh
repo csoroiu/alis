@@ -7,19 +7,19 @@ if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
-    echo " raspbian_full_latest"
-    echo " raspbian_latest"
-    echo " raspbian_lite_latest"
+    echo " raspios_full_armhf_latest"
+    echo " raspios_armhf_latest"
+    echo " raspios_lite_armhf_latest"
     exit 1
 fi
 
 device="$1"
 distro="$2"
 
-"${PROGDIR}/rpi-raspbian-get.sh" ${distro}
+"${PROGDIR}/rpi-raspios-get.sh" ${distro}
 
 echo ""
 echo "Unmounting all partitions for ${device}"
 sudo umount ${device}?* || :
 
-sudo "${PROGDIR}/rpi-raspbian-write.sh" ${device} ${distro}
+sudo "${PROGDIR}/rpi-raspios-write.sh" ${device} ${distro}
