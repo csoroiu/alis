@@ -15,10 +15,10 @@ fi
 device="$1"
 distro="$2"
 
-"${PROGDIR}/rpi-libreELEC-get.sh" ${distro}
+"${PROGDIR}/rpi-libreELEC-9.2.1-get.sh" ${distro}
 
 echo ""
 echo "Unmounting all partitions for ${device}"
 sudo umount ${device}?* || :
 
-sudo "${PROGDIR}/rpi-libreELEC-write.sh" ${device} ${distro}
+sudo "${PROGDIR}/rpi-libreELEC-9.2.1-write.sh" ${device} ${distro}

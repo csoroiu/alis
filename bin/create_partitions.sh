@@ -20,15 +20,18 @@ function partition ( )
     260M,,83
 end
 
+    # notify kernel to re-read the partition table
+    partx -v -u ${device}
     echo ""
     echo Creating and formating the filesystems
     mkfs.vfat -F 32 ${device}1
     mkfs.ext4 -O ^huge_file -F ${device}2
+
     # notify kernel to re-read the partition table
-    # partprobe ${device}
-    # partx -u ${device}
+    # partprobe -s ${device}
+    partx -v -u ${device}
     # blockdev --rereadpt -v ${device}
-    hdparm -z ${device}
+    # hdparm -z ${device}
 }
 
 if [[ $# -eq 0 ]]; then
