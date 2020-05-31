@@ -26,10 +26,11 @@ end
     echo Creating and formating the filesystems
     mkfs.vfat -F 32 ${device}1
     mkfs.ext4 -O ^huge_file -F ${device}2
+    partx -v -u ${device}
 
     # notify kernel to re-read the partition table
+    # partx -v -u ${device}
     # partprobe -s ${device}
-    partx -v -u ${device}
     # blockdev --rereadpt -v ${device}
     # hdparm -z ${device}
 }

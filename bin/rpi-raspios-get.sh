@@ -12,8 +12,6 @@ fi
 
 distro="$1"
 
-#The mirror in greece does not answer with the file's timestamp
-
 image_url="$(get_arch_mirror https://downloads.raspberrypi.org/${distro})"
 echo ""
 download_if_newer "${image_url}"

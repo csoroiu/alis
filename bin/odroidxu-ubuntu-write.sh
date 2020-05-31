@@ -37,12 +37,13 @@ echo ""
 echo "Unpacking and writing image on sd card"
 eval $(get_unpack_toconsole_command_single_file_archive ${file_name}) | \
   dd bs=4M of=${device} conv=fsync status=progress
-sync -d ${device}
+partx -v -u ${device}
 
 #echo ""
 #echo Writing u-boot image
 #dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
 #sync -d ${device}
+#partx -v -u ${device}
 
 echo ""
 echo Mounting boot and root

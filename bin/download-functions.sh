@@ -9,7 +9,7 @@ function get_arch_mirror ( )
 	if [[ -z ${mirror} ]]; then
 	    mirror=$@
 	    break
-	elif [[ "${mirror}" =~ "/gr.mirror." ]]; then
+	elif [[ "${mirror}" =~ "/gr.mirror.archlinuxarm.org" ]]; then
 	    mirror=$@
 	    continue
 	else
