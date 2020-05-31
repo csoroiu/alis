@@ -6,7 +6,8 @@
 # gzip package for gzip tools
 # zstd package for zstd tools
 # libarchive package for bsdtar tools
-# tar pacakge for tar tools
+# tar package for tar tools
+# zip package for zip tools
 
 un_gzip_toconsole='gzip -d -k -f -c -- ${file_name}'
 un_xz_toconsole='xz -d -k -f -c -- ${file_name}' #-v for progress
@@ -22,15 +23,15 @@ function get_file_extension ( )
 {
   fullfile=$*
   filename=$(basename -- "${fullfile}")
-  extension="${filename##*.}"
-  echo ${extension}
+  extension="${filename#*.}"
+  echo .${extension}
 }
 
 function get_file_name_no_extension ( )
 {
   fullfile=$*
   extension=$(get_file_extension ${fullfile})
-  filename=${fullfile%.${extension}}
+  filename=${fullfile%${extension}}
   echo ${filename}
 }
 
@@ -51,26 +52,30 @@ function get_unpack_toconsole_command_single_file_archive ( )
 #    tar.bz2|tar.bzip2|tbz|tbz2)
 #      echo tar.bz2
 #    ;;
-    zip)
+    *.tar.*|*.tar)
+      echo "Unsupported suffix \"${extension}\" for file \"$fullfile\"" >&2
+      return 1
+    ;;
+    *.zip)
       ret=${un_zip_toconsole}
     ;;
-    gz|gzip)
+    *.gz|*.gzip)
       ret=${un_gzip_toconsole}
     ;;
-    xz)
+    *.xz)
       ret=${un_xz_toconsole}
     ;;
-    bz2|bzip2)
+    *.bz2|*.bzip2)
       ret=${un_bzip2_toconsole}
     ;;
-    zst)
+    *.zst)
       ret=${un_zstd_toconsole}
     ;;
-    img|bin)
+    *.img|*.bin)
       ret=${cat}
     ;;
     *)
-      echo "Unknown suffix \"${extension}\" for file \"$fullfile\"" >&2
+      echo "Unsupported suffix \"${extension}\" for file \"$fullfile\"" >&2
       return 1
     ;;
   esac
