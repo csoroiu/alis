@@ -3,6 +3,8 @@ readonly PROGNAME=$(basename $0)
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS="$@"
 
+. $PROGDIR/archive-functions.sh --source-only
+
 function comment_line ( )
 {
     local pattern=$1
@@ -38,14 +40,9 @@ distro="$2"
 file_name=$(readlink -- "${distro}.zip")
 
 echo ""
-echo "Unpacking the image"
-#Image should have the same name as the zip but different extension
-image_name="$(basename ${file_name} .zip).img"
-#extract only that image file
-unzip -o ${file_name} ${image_name}
-
-echo "Writing image on sd card"
-dd bs=4M if=${image_name} of=${device} conv=fsync status=progress
+echo "Unpacking and writing image on sd card"
+eval $(get_unpack_toconsole_command_single_file_archive ${file_name}) | \
+  dd bs=4M of=${device} conv=fsync status=progress
 sync -d ${device}
 
 echo ""
