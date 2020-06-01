@@ -16,10 +16,14 @@ fi
 device="$1"
 distro="$2"
 
+#downloading file
 "${PROGDIR}/rpi-raspios-get.sh" ${distro}
 
-echo ""
-echo "Unmounting all partitions for ${device}"
-sudo umount ${device}?* || :
+#real file_name is known only after download
+file_name=$(readlink -- "${distro}.zip")
 
-sudo "${PROGDIR}/rpi-raspios-write.sh" ${device} ${distro}
+#writing image to disk
+sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+
+#patching distro
+sudo "${PROGDIR}/rpi-raspios-patch.sh" ${device}

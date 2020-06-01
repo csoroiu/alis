@@ -9,7 +9,7 @@ function partition ( )
     echo ""
     echo "Unmounting all partitions for ${device}" 
     #skip mount errors
-    umount ${device}?* || :
+    umount "${device}"?* || :
     #echo Wiping out first 128MB for "${device}"
     #dd if=/dev/zero of=${device} bs=1M count=128 status=progress
     echo ""
@@ -22,13 +22,15 @@ end
 
     # notify kernel to re-read the partition table
     partx -v -u ${device}
+
     echo ""
-    echo Creating and formating the filesystems
+    echo "Creating and formating the filesystems"
     mkfs.vfat -F 32 ${device}1
     mkfs.ext4 -O ^huge_file -F ${device}2
-    partx -v -u ${device}
 
     # notify kernel to re-read the partition table
+    partx -v -u ${device}
+
     # partx -v -u ${device}
     # partprobe -s ${device}
     # blockdev --rereadpt -v ${device}
@@ -45,4 +47,4 @@ if [[ "$EUID" -ne 0 ]]; then
 fi
 device=$1
 
-partition ${device}
+partition "${device}"

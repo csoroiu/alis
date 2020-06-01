@@ -29,18 +29,18 @@ function get_file_extension ( )
 
 function get_file_name_no_extension ( )
 {
-  fullfile=$*
-  extension=$(get_file_extension ${fullfile})
-  filename=${fullfile%${extension}}
+  local fullfile=$*
+  local extension=$(get_file_extension ${fullfile})
+  local filename=${fullfile%${extension}}
   echo ${filename}
 }
 
 function get_unpack_toconsole_command_single_file_archive ( )
 {
-  fullfile=$*
-  extension=$(get_file_extension ${fullfile})
-  filename=$(get_file_name_no_extension ${fullfile})
-  ret=""
+  local fullfile=$*
+  local extension=$(get_file_extension ${fullfile})
+  local filename=$(get_file_name_no_extension ${fullfile})
+  local ret=""
 
   case "$extension" in
 #    tar.gz|tar.gzip|tgz)

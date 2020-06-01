@@ -10,10 +10,19 @@ fi
 
 device="$1"
 
+#downloading file
 "${PROGDIR}/odroidxu-ubuntu-get.sh"
 
-echo ""
-echo "Unmounting all partitions for ${device}"
-sudo umount ${device}?* || :
+#real file_name is known only after download
+file_name="ubuntu-14.04lts-server-odroid-xu-20140714.img.xz"
 
-sudo "${PROGDIR}/odroidxu-ubuntu-write.sh" ${device}
+#writing image to disk
+sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+
+#echo ""
+#echo Writing u-boot image
+#dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
+#partx -v -u ${device}
+
+#patching distro
+sudo "${PROGDIR}/odroidxu-ubuntu-patch.sh" ${device}

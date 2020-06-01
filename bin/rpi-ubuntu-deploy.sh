@@ -15,10 +15,15 @@ fi
 device="$1"
 distro="$2"
 
+
+#downloading file
 "${PROGDIR}/rpi-ubuntu-get.sh" ${distro}
 
-echo ""
-echo "Unmounting all partitions for ${device}"
-sudo umount ${device}?* || :
+#real file_name is known only after download
+file_name="ubuntu-20.04-preinstalled-server-${distro}+raspi.img.xz"
 
-sudo "${PROGDIR}/rpi-ubuntu-write.sh" ${device} ${distro}
+#writing image to disk
+sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+
+#patching distro
+sudo "${PROGDIR}/rpi-ubuntu-patch.sh" ${device}

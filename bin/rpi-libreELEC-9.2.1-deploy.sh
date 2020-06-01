@@ -17,8 +17,10 @@ distro="$2"
 
 "${PROGDIR}/rpi-libreELEC-9.2.1-get.sh" ${distro}
 
-echo ""
-echo "Unmounting all partitions for ${device}"
-sudo umount ${device}?* || :
+#real file_name is known only after download
+file_name="LibreELEC-${distro}.arm-9.2.1.img.gz"
 
-sudo "${PROGDIR}/rpi-libreELEC-9.2.1-write.sh" ${device} ${distro}
+#writing image to disk
+sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+
+sudo "${PROGDIR}/generic-patch.sh" "${device}"
