@@ -7,7 +7,7 @@ readonly ARGS="$@"
 
 function write_image ( )
 {
-	local device=$1
+    local device=$1
     local file_name=$2
     echo ""
     echo "Unmounting all partitions for ${device}"
@@ -32,7 +32,5 @@ if [[ "$EUID" -ne 0 ]]; then
   echo "Please run as root"
   exit
 fi
-device=$1
-file_name=$2
 
-write_image "${device}" "${file_name}"
+write_image "$@"

@@ -19,9 +19,9 @@ file_name="$(get_file_name_from_url ${url})"
 image_sha256="${file_name}.sha256"
 
 echo ""
-download_if_newer_arch ${url}
+download_if_newer ${url}
 echo ""
-download_if_newer_arch "${url}.sha256"
+download_if_newer "${url}.sha256"
 
 echo ""
 echo "Checking sha256 sum"

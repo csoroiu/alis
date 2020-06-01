@@ -1,11 +1,16 @@
 #!/bin/bash
 
+function resolve_final_url ( )
+{
+    wget -S -nv --spider -N --content-disposition $@ 2>&1 | grep -e Location | tail -n 1 | sed -e 's/^.*Location:\s*//'
+}
+
 function get_arch_mirror ( )
 {
     local parent=$@
     local mirror=
     for i in $(seq 1 30); do
-        mirror=$(wget -S -nv --spider -N --content-disposition $@ 2>&1 | grep -e Location | sed -e 's/^.*Location:\s*//')
+        mirror=$(resolve_final_url $@)
 	if [[ -z ${mirror} ]]; then
 	    mirror=$@
 	    break
@@ -18,6 +23,7 @@ function get_arch_mirror ( )
     done
     echo ${mirror}
 }
+
 
 function download_if_newer ( )
 {

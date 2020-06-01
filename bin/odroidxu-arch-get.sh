@@ -17,5 +17,8 @@ echo ""
 download_if_newer_arch http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz
 echo ""
 download_if_newer_arch http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz.md5
+
+echo ""
+echo "Checking md5 sum"
 md5sum -c ArchLinuxARM-odroid-xu-latest.tar.gz.md5
 

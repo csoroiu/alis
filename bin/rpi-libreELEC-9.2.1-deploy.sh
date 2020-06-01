@@ -23,4 +23,5 @@ file_name="LibreELEC-${distro}.arm-9.2.1.img.gz"
 #writing image to disk
 sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
+#patching distro
 sudo "${PROGDIR}/generic-patch.sh" "${device}"

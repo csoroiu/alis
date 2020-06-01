@@ -14,4 +14,7 @@ echo ""
 download_if_newer https://odroid.in/ubuntu_14.04lts/ubuntu-14.04lts-server-odroid-xu-20140714.img.xz
 echo ""
 download_if_newer https://odroid.in/ubuntu_14.04lts/ubuntu-14.04lts-server-odroid-xu-20140714.img.xz.md5sum
+
+echo ""
+echo "Checking md5 sum"
 md5sum -c ubuntu-14.04lts-server-odroid-xu-20140714.img.xz.md5sum

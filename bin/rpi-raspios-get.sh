@@ -12,7 +12,7 @@ fi
 
 distro="$1"
 
-image_url="$(get_arch_mirror https://downloads.raspberrypi.org/${distro})"
+image_url="$(resolve_final_url https://downloads.raspberrypi.org/${distro})"
 echo ""
 download_if_newer "${image_url}"
 echo ""
