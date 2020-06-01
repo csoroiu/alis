@@ -13,23 +13,27 @@ function partition ( )
     #echo Wiping out first 128MB for "${device}"
     #dd if=/dev/zero of=${device} bs=1M count=128 status=progress
     echo ""
-    echo Creating partitions for "${device}"
-    sfdisk --delete ${device}
-    sfdisk -X dos ${device} << end
+    echo "Wiping out any existing partitions and filesystems"
+    flock "${device}" wipefs -a -f "${device}"* || : #removing signatures and partition table
+    #flock "${device}" sfdisk --delete "${device}" || : #emptying the partition table
+
+    echo ""
+    echo "Creating partitions for ${device}"
+    flock "${device}" sfdisk -W always -X dos "${device}" << end
     4M,256M,c
     260M,,83
 end
 
     # notify kernel to re-read the partition table
-    partx -v -u ${device}
+    partx -v -u "${device}"
 
     echo ""
     echo "Creating and formating the filesystems"
-    mkfs.vfat -F 32 ${device}1
-    mkfs.ext4 -O ^huge_file -F ${device}2
+    mkfs.vfat -F 32 "${device}"1
+    mkfs.ext4 -O ^huge_file -F "${device}"2
 
     # notify kernel to re-read the partition table
-    partx -v -u ${device}
+    partx -v -u "${device}"
 
     # partx -v -u ${device}
     # partprobe -s ${device}
