@@ -20,8 +20,8 @@ function partition ( )
     echo ""
     echo "Creating partitions for ${device}"
     flock "${device}" sfdisk -W always -X dos "${device}" << end
-    4M,256M,c
-    260M,,83
+    4M,256M,c,*
+    256M,,83
 end
 
     # notify kernel to re-read the partition table

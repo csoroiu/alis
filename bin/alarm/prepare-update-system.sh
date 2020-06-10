@@ -18,7 +18,7 @@ pacman -S --noconfirm bash-completion
 pacman -S --noconfirm usbutils
 #device tree compiler
 pacman -S --noconfirm dtc
-
+#pacman -S --noconfirm raspberrypi-userland-aarch64-git
 
 #request password for sudo operations
 echo 'alarm ALL=NOPASSWD: ALL' >/etc/sudoers.d/user-alarm
