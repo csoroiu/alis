@@ -7,7 +7,7 @@ readonly ARGS="$@"
 # install yay
 deploy_user=alarm
 
-pacman -S --noconfirm --needed base-devel git
+pacman -S --noconfirm --needed base-devel libffi git
 pushd /opt
 git clone https://aur.archlinux.org/yay-git.git
 chown -R ${deploy_user}:${deploy_user} yay-git
