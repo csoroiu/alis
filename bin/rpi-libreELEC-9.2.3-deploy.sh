@@ -15,10 +15,10 @@ fi
 device="$1"
 distro="$2"
 
-"${PROGDIR}/rpi-libreELEC-9.2.1-get.sh" ${distro}
+"${PROGDIR}/rpi-libreELEC-9.2.3-get.sh" ${distro}
 
 #real file_name is known only after download
-file_name="LibreELEC-${distro}.arm-9.2.1.img.gz"
+file_name="LibreELEC-${distro}.arm-9.2.3.img.gz"
 
 #writing image to disk
 sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"

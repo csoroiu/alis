@@ -14,7 +14,7 @@ fi
 
 distro="$1"
 
-url=http://releases.libreelec.tv/LibreELEC-${distro}.arm-9.2.1.img.gz
+url="http://releases.libreelec.tv/LibreELEC-${distro}.arm-9.2.3.img.gz"
 file_name="$(get_file_name_from_url ${url})"
 image_sha256="${file_name}.sha256"
 
