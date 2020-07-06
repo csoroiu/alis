@@ -22,7 +22,7 @@ pacman -S --noconfirm dtc
 
 #request password for sudo operations
 echo 'alarm ALL=NOPASSWD: ALL' >/etc/sudoers.d/user-alarm
-usermod -aG docker alarm
+gpasswd -a alarm docker
 
 systemctl enable docker.socket
 systemctl enable docker.service

@@ -71,7 +71,7 @@ function get_unpack_toconsole_command_single_file_archive ( )
     *.zst)
       ret=${un_zstd_toconsole}
     ;;
-    *.img|*.bin|*.raw)
+    *.img|*.bin|*.raw|*.iso)
       ret=${cat}
     ;;
     *)

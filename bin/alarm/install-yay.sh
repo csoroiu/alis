@@ -16,4 +16,7 @@ cd yay-git
 sudo -H -u ${deploy_user} makepkg -si --noconfirm
 #cleanup unwanted dependencies
 sudo -H -u ${deploy_user} yay -Yc --noconfirm
+#save default settings for yay
+#https://forum.manjaro.org/t/how-can-one-set-up-a-cron-job-to-update-with-yay/64725
+#yay --save --nocleanmenu --nodiffmenu --noeditmenu --noupgrademenu --removemake --cleanafter --norebuild --combinedupgrade --noredownload --useask --nosudoloop --clean
 popd
