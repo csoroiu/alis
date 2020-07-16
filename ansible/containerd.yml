@@ -1,0 +1,8 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: "Install containerd"
+      package:
+        name: containerd
+        state: latest

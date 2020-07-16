@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: true
+  vars: 
+    power_user: "{{ ansible_user }}"
+
+  tasks:
+    - name: "Install docker"
+      package:
+        name: docker
+        state: latest
+
+    - name: "Enable and start docker.socket"
+      systemd:
+        name: docker.socket
+        enabled: true
+        state: started
+
+    - name: "Enable and start docker.service"
+      systemd:
+        name: docker.service
+        enabled: true
+        state: started
+
+    - name: "Add {{ power_user }} to docker group"
+      user:
+        name: "{{ power_user }}"
+        groups: docker
+        append: true

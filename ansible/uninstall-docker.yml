@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: true
+  vars:
+    power_user: "{{ ansible_user }}"
+
+  tasks:
+#    - name: "Retrieving info for {{ power_user }}"
+#      user:
+#        name: "{{ power_user }}"
+#        state: present
+#      register: user_data
+
+    - name: "Removing {{ power_user }} from docker group"
+      shell: "gpasswd -d {{ power_user }} docker"
+      ignore_errors: yes
+      #when: user_data.groups is defined and docker in user_data.groups
+
+    - name: "Disable and stop docker.service"
+      systemd:
+        name: docker.service
+        enabled: false
+        state: stopped
+
+    - name: "Disable and stop docker.socket"
+      systemd:
+        name: docker.socket
+        enabled: false
+        state: stopped
+
+    - name: "Uninstall docker"
+      package:
+        name: docker
+        state: absent
