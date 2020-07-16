@@ -3,19 +3,33 @@ readonly PROGNAME=$(basename $0)
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS="$@"
 
+function wipe_fs_partx ( )
+{
+   local device=$1
+
+    echo ""
+    echo "Wiping out any existing filesystems on all partitions"
+    # removing signatures of filesystem
+    flock "${device}" wipefs -a -f "${device}"? || :
+    # removing partitions from kernel (does not delete anything on device)
+    echo "Delete partitions from kernel"
+    flock "${device}" partx -v -d "${device}" || :
+    # removing signatures of partition table
+    echo "Wiping out the partition table"
+    flock "${device}" wipefs -a -f "${device}" || :
+
+}
+
 function partition ( )
 {
     local device=$1
     echo ""
     echo "Unmounting all partitions for ${device}" 
-    #skip mount errors
+
+    # umount and skip mount errors
     umount "${device}"?* || :
-    #echo Wiping out first 128MB for "${device}"
-    #dd if=/dev/zero of=${device} bs=1M count=128 status=progress
-    echo ""
-    echo "Wiping out any existing partitions and filesystems"
-    flock "${device}" wipefs -a -f "${device}"* || : #removing signatures and partition table
-    #flock "${device}" sfdisk --delete "${device}" || : #emptying the partition table
+
+    wipe_fs_partx "${device}"
 
     echo ""
     echo "Creating partitions for ${device}"
