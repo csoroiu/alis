@@ -26,8 +26,14 @@ echo "Patching files"
 
 cp -a root/etc/locale.gen root/etc/locale.gen.original
 uncomment_line "^#en_US" root/etc/locale.gen
-cp -a root/etc/hostname root/etc/hostname.original
-echo odroid > root/etc/hostname
+
+if [[ ! -z ${ALIS_DEPLOY_HOSTNAME} ]]; then
+    cp -a root/etc/hostname root/etc/hostname.original
+    echo "Setting hostname to \"${ALIS_DEPLOY_HOSTNAME}\""
+    echo ${ALIS_DEPLOY_HOSTNAME} > root/etc/hostname
+else
+    echo "Using default hostname \"$(cat root/etc/hostname)\""
+fi
 
 echo "Credentials are:"
 echo "  Username: root"
