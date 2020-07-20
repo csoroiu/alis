@@ -33,13 +33,16 @@ function partition ( )
 
     echo ""
     echo "Creating partitions for ${device}"
-    flock "${device}" sfdisk -W always -X dos "${device}" << end
-    4M,256M,c,*
-    256M,,83
+    flock "${device}" sfdisk -W always "${device}" << end
+    label: dos
+    unit: sectors
+
+    start=4M,size=256M,type=c,bootable
+    start=260M,type=83
 end
 
     # notify kernel to re-read the partition table
-    partx -v -u "${device}"
+    flock "${device}" partx -v -u "${device}"
 
     echo ""
     echo "Creating and formating the filesystems"
@@ -47,7 +50,7 @@ end
     mkfs.ext4 -O ^huge_file -F "${device}"2
 
     # notify kernel to re-read the partition table
-    partx -v -u "${device}"
+    flock "${device}" partx -v -u "${device}"
 
     # partx -v -u ${device}
     # partprobe -s ${device}

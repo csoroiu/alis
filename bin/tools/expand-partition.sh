@@ -1,0 +1,34 @@
+#!/bin/bash -e
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
+readonly ARGS="$@"
+
+if [[ $# -ne 2 ]]; then
+    echo "Invalid arguments provided."
+    echo "First argument needs to be the devic "
+    echo "Second argument needs to be number of the partition"
+    echo " E.g. ${PROGNAME} /dev/sdd 2"
+    exit 1
+fi
+
+if [[ "$EUID" -ne 0 ]]; then
+  echo "Please run as root"
+  exit
+fi
+
+device=$1
+partition_no=$2
+partition=${device}${partition_no}
+
+
+echo "Running a check"
+flock "${device}" e2fsck -f ${partition}
+
+echo "Modifying partition table"
+echo ", +" | flock "${device}" sfdisk -N ${partition_no} ${device}
+
+echo "Resizing the filesystem"
+flock "${device}" resize2fs -p ${partition}
+
+#notifying kernel about the changes
+flock "${device}" partx -v -u "${device}"
