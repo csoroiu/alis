@@ -8,8 +8,8 @@ readonly ARGS="$@"
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name:"
     echo " rpi-2: for 32bit rpi-2 and rpi-3"
-    echo " rpi-3: for 64bit rpi-3 (aarch64)"
     echo " rpi-4: for 32bit rpi-4"
+    echo " rpi-aarch64: for 64bit rpi-3 and rpi-4"
     exit 1
 fi
 

@@ -8,6 +8,7 @@ pacman-key --populate archlinuxarm
 
 #hostnamectl set-hostname odroid
 timedatectl set-timezone Europe/Bucharest
+locale-gen
 localectl set-locale LANG=en_US.UTF-8
 
 pacman -Syu --noconfirm

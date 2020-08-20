@@ -22,8 +22,8 @@ if [[ $# -ne 2 ]]; then
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
     echo " rpi-2: for 32bit rpi-2 and rpi-3"
-    echo " rpi-3: for 64bit rpi-3 (aarch64)"
     echo " rpi-4: for 32bit rpi-4"
+    echo " rpi-aarch64: for 64bit rpi-3 and rpi-4"
     exit 1
 fi
 
@@ -72,3 +72,7 @@ cp -r "${PROGDIR}/raspberry" root/home/alarm/bin
 echo ""
 echo Unmounting
 umount boot root
+
+echo "for pi4 run:"
+echo "sed -i 's/mmcblk0/mmcblk1/g' root/etc/fstab"
+

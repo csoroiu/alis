@@ -37,8 +37,8 @@ function partition ( )
     label: dos
     unit: sectors
 
-    start=4M,size=256M,type=c,bootable
-    start=260M,type=83
+    4M,256M,c,*
+    260M,+,83,-
 end
 
     # notify kernel to re-read the partition table

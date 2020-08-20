@@ -18,8 +18,11 @@ fi
 
 device=$1
 partition_no=$2
-partition=${device}${partition_no}
-
+if [[ $device = *[0-9] ]]; then
+  partition=${device}p${partition_no}
+else
+  partition=${device}${partition_no}
+fi
 
 echo "Running a check"
 flock "${device}" e2fsck -f ${partition}

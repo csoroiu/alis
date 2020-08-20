@@ -35,6 +35,4 @@ else
     echo "Using default hostname \"$(cat root/etc/hostname)\""
 fi
 
-cp -r "${PROGDIR}/raspberry" root/home/pi/bin
-
 umount_device "${device}"
