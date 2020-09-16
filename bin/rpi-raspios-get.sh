@@ -6,7 +6,9 @@ readonly ARGS="$@"
 . $PROGDIR/download-functions.sh --source-only
 
 if [[ $# -ne 1 ]]; then
-    echo "Invalid arguments provided. Needs to receive the distro name: raspios_full_armhf_latest, raspios_armhf_latest or raspios_lite_armhf_latest"
+    echo "Invalid arguments provided. Needs to receive the distro name:"
+    echo " raspios_full_armhf_latest, raspios_armhf_latest, raspios_lite_armhf_latest,"
+    echo " raspios_arm64_latest, raspios_lite_arm64_latest"
     exit 1
 fi
 
