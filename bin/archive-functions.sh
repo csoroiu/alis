@@ -12,7 +12,7 @@
 un_gzip_toconsole='gzip -d -k -f -c -- ${file_name}'
 un_xz_toconsole='xz -d -k -f -c -- ${file_name}' #-v for progress
 un_bzip2_toconsole='bzip2 -d -k -f -c -- ${file_name}'
-un_zstd_toconsole='zstd -d -k -f -c -- ${file_name}' #zstd can also decompress gzip, xz, lzma and lz4
+un_zstd_toconsole='zstd -q -d -k -f -c -- ${file_name}' #zstd can also decompress gzip, xz, lzma and lz4
 un_zip_toconsole='unzip -o -p -- ${file_name}'
 
 #un_tar='tar -xf ${file_name}'
