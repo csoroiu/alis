@@ -20,7 +20,7 @@ distro="$2"
 "${PROGDIR}/rpi-ubuntu-get.sh" ${distro}
 
 #real file_name is known only after download
-file_name="ubuntu-20.04-preinstalled-server-${distro}+raspi.img.xz"
+file_name="ubuntu-20.04.1-preinstalled-server-${distro}+raspi.img.xz"
 
 #writing image to disk
 sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
