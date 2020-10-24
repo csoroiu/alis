@@ -3,12 +3,15 @@ readonly PROGNAME=$(basename $0)
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS="$@"
 
+UBUNTU_VERSION=${UBUNTU_VERSION:=20.10}
+
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
     echo " armhf: for rpi-2,3,4"
     echo " arm64: for rpi-3,4"
+    echo "The UBUNTU_VERSION variable controls the version to deploy."
     exit 1
 fi
 
@@ -20,7 +23,7 @@ distro="$2"
 "${PROGDIR}/rpi-ubuntu-get.sh" ${distro}
 
 #real file_name is known only after download
-file_name="ubuntu-20.04.1-preinstalled-server-${distro}+raspi.img.xz"
+file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-${distro}+raspi.img.xz"
 
 #writing image to disk
 sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
