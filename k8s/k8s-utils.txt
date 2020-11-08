@@ -1,0 +1,21 @@
+kubectl
+-------
+on arm64: 
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/arm64/kubectl"
+sudo install kubectl /usr/local/bin
+
+kubectx - https://github.com/ahmetb/kubectx.git
+-------
+git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
+
+
+helm
+----
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+
+node-shell - https://github.com/kvaps/kubectl-node-shell
+----------
+
+curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
+sudo install kubectl-node_shell /usr/local/bin/

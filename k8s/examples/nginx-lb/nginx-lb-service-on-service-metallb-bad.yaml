@@ -1,0 +1,17 @@
+# this was an atempt to create a service over another service and
+# expose it to outside using LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb-service-on-service
+  annotations:
+    metallb.universe.tf/address-pool: default
+spec:
+  selector:
+    app: nginx-service
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+  type: LoadBalancer

@@ -1,0 +1,26 @@
+# The default configuration values can be found here:
+# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+#
+# Documentation can be found here: https://doc.traefik.io/traefik/
+#
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: metallb
+  namespace: kube-system
+
+spec:
+  chart: metallb
+  version: 0.1.27
+  repo: https://charts.bitnami.com/bitnami
+  targetNamespace: metallb-system
+  valuesContent: |-
+    image:
+      name: "metallb"
+      tag: 0.9.4
+#    tolerations:
+#      - key: "CriticalAddonsOnly"
+#        operator: "Exists"
+#      - key: "node-role.kubernetes.io/master"
+#        operator: "Exists"
+#        effect: "NoSchedule"

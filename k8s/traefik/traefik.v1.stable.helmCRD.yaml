@@ -1,0 +1,30 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: traefik
+  namespace: kube-system
+
+spec:
+  chart: stable/traefik
+  version: 1.87.2
+# if uncommented causes problems
+#  repo: https://kubernetes-charts.storage.googleapis.com/
+  targetNamespace: kube-system
+  valuesContent: |-
+    rbac:
+      enabled: true
+    ssl:
+      enabled: true
+    metrics:
+      prometheus:
+        enabled: true
+    kubernetes:
+      ingressEndpoint:
+        useDefaultPublishedService: true
+    image: "traefik"
+    tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+        effect: "NoSchedule"
