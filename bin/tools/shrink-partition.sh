@@ -26,7 +26,7 @@ fi
 
 
 echo "Running a check"
-flock "${device}" e2fsck -f ${partition}
+flock "${device}" e2fsck -y -f ${partition} -E fixes_only
 
 echo "Resizing the filesystem"
 flock "${device}" resize2fs -p -M ${partition}

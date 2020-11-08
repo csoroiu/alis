@@ -25,7 +25,7 @@ else
 fi
 
 echo "Running a check"
-flock "${device}" e2fsck -f ${partition}
+flock "${device}" e2fsck -y -f ${partition} -E fixes_only
 
 echo "Modifying partition table"
 echo ", +" | flock "${device}" sfdisk -N ${partition_no} ${device}
