@@ -6,13 +6,13 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-server-1.18.10
+  name: k3s-server-1.18.12
   namespace: system-upgrade
   labels:
     k3s-upgrade: server
 spec:
   concurrency: 1
-  version: v1.18.10+k3s1
+  version: v1.18.12+k3s1
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -30,13 +30,13 @@ spec:
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-agent-1.18.10
+  name: k3s-agent-1.18.12
   namespace: system-upgrade
   labels:
     k3s-upgrade: agent
 spec:
   concurrency: 3 # in general, this should be the number of workers - 1
-  version: v1.18.10+k3s1
+  version: v1.18.12+k3s1
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -49,7 +49,7 @@ spec:
     # Since v0.5.0-m1 SUC will use the resolved version of the plan for the tag on the prepare container.
     # image: rancher/k3s-upgrade:v1.17.4-k3s1
     image: rancher/k3s-upgrade
-    args: ["prepare", "k3s-server-1.18.10"]
+    args: ["prepare", "k3s-server-1.18.12"]
   drain:
     force: true
     skipWaitForDeleteTimeout: 60 # set this to prevent upgrades from hanging on small clusters since k8s v1.18
