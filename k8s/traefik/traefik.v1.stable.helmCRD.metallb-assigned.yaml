@@ -19,6 +19,7 @@ spec:
   repo: https://charts.helm.sh/stable
   targetNamespace: kube-system
   valuesContent: |-
+    image: "traefik"
     rbac:
       enabled: true
     ssl:
@@ -34,10 +35,12 @@ spec:
     kubernetes:
       ingressEndpoint:
         useDefaultPublishedService: true
-    image: "traefik"
     tolerations:
       - key: "CriticalAddonsOnly"
         operator: "Exists"
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
       - key: "node-role.kubernetes.io/master"
         operator: "Exists"
         effect: "NoSchedule"
