@@ -1,7 +1,10 @@
 # The default configuration values can be found here:
-# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+# v2: https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+# v2 documentation can be found here: https://doc.traefik.io/traefik/
 #
-# Documentation can be found here: https://doc.traefik.io/traefik/
+# v1: https://github.com/helm/charts/blob/master/stable/traefik/values.yaml 
+# https://github.com/helm/charts/tree/master/stable/traefik
+# deprecated after chart 1.87.5/traefik 1.7.26
 #
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -15,11 +18,6 @@ spec:
   repo: https://helm.traefik.io/traefik
   targetNamespace: kube-system
   valuesContent: |-
-#    ssl:
-#      enabled: true
-#    kubernetes:
-#      ingressEndpoint:
-#        useDefaultPublishedService: true
     image:
       name: "traefik"
       tag: 2.3.1

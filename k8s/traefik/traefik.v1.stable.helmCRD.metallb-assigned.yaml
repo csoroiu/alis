@@ -13,7 +13,7 @@ metadata:
   namespace: kube-system
 
 spec:
-  chart: stable/traefik
+  chart: traefik
   version: 1.87.5
 # if uncommented causes problems
   repo: https://charts.helm.sh/stable
@@ -26,6 +26,11 @@ spec:
     metrics:
       prometheus:
         enabled: true
+    service:
+      annotations:
+        metallb.universe.tf/address-pool: expensive    
+      spec:
+        loadBalancerIP: "192.168.1.160"
     kubernetes:
       ingressEndpoint:
         useDefaultPublishedService: true

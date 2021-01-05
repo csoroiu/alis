@@ -1,8 +1,3 @@
-# The default configuration values can be found here:
-# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
-#
-# Documentation can be found here: https://doc.traefik.io/traefik/
-#
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -11,13 +6,13 @@ metadata:
 
 spec:
   chart: metallb
-  version: 0.1.27
+  version: 2.0.3
   repo: https://charts.bitnami.com/bitnami
   targetNamespace: metallb-system
   valuesContent: |-
     image:
       name: "metallb"
-      tag: 0.9.4
+      tag: 0.9.5
 #    tolerations:
 #      - key: "CriticalAddonsOnly"
 #        operator: "Exists"

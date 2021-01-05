@@ -1,10 +1,12 @@
 #ansible arch -a "yay -Sy --noconfirm k3s-bin"
 
 #for the master nodes
+#export INSTALL_K3S_VERSION=v1.19.5+k3s2
 export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
 curl -sfL https://get.k3s.io | sh -s -
 
 #for the agent nodes
+#export INSTALL_K3S_VERSION=v1.19.5+k3s2
 export K3S_URL=
 export K3S_TOKEN=
 curl -sfL https://get.k3s.io | sh -s -
