@@ -23,6 +23,8 @@ curl -sfL https://get.k3s.io | sh -s -
 #add worker role to single node
 #kubectl label node kube2 node-role.kubernetes.io/worker=true
 
+#kubectl label nodes k3s-upgrade=true --all
+
 #taint all nodes with a label
 #kubectl taint nodes -l node-role.kubernetes.io/master node-role.kubernetes.io/master=true:NoSchedule
 #kubectl taint nodes -l node-role.kubernetes.io/master node-role.kubernetes.io/master=true:NoExecute

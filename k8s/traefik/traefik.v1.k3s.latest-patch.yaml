@@ -7,7 +7,7 @@
 # deprecated after chart 1.87.5/traefik 1.7.26
 #
 apiVersion: helm.cattle.io/v1
-kind: HelmChart
+kind: HelmChartConfig
 metadata:
   name: traefik
   namespace: kube-system
@@ -15,21 +15,10 @@ metadata:
 spec:
   chart: traefik
   version: 1.87.5
-# if uncommented causes problems
   repo: https://charts.helm.sh/stable
   targetNamespace: kube-system
   valuesContent: |-
     image: "traefik"
-    rbac:
-      enabled: true
-    ssl:
-      enabled: true
-    metrics:
-      prometheus:
-        enabled: true
-    kubernetes:
-      ingressEndpoint:
-        useDefaultPublishedService: true
     tolerations:
       - key: "CriticalAddonsOnly"
         operator: "Exists"
