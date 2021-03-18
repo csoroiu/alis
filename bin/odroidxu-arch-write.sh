@@ -52,7 +52,7 @@ mv root/boot/* boot
 echo ""
 echo "Patching files"
 cp -a boot/boot.ini boot/boot.ini.original
-#comment_line "setenv fdt_high" boot/boot.ini
+comment_line "setenv fdt_high" boot/boot.ini
 sed -e 's/0x41f00000/0x4fff2000/g' -i boot/boot.ini
 
 cp -a root/etc/locale.gen root/etc/locale.gen.original
