@@ -26,7 +26,7 @@ distro="$2"
 file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-${distro}+raspi.img.xz"
 
 #writing image to disk
-sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,UBUNTU_VERSION "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
 #patching distro
-sudo "${PROGDIR}/rpi-ubuntu-patch.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,UBUNTU_VERSION "${PROGDIR}/rpi-ubuntu-patch.sh" ${device}

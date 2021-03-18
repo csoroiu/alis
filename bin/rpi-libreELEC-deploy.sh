@@ -24,7 +24,7 @@ distro="$2"
 file_name="LibreELEC-${distro}.arm-${LIBREELEC_VERSION}.img.gz"
 
 #writing image to disk
-sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,LIBREELEC_VERSION "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
 #patching distro
-sudo "${PROGDIR}/generic-patch.sh" "${device}"
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,LIBREELEC_VERSION "${PROGDIR}/generic-patch.sh" "${device}"

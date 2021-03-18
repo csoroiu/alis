@@ -18,4 +18,4 @@ distro="$2"
 
 "${PROGDIR}/rpi-arch-get.sh" ${distro}
 sudo "${PROGDIR}/create_partitions.sh" ${device}
-sudo "${PROGDIR}/rpi-arch-write.sh" ${device} ${distro}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/rpi-arch-write.sh" ${device} ${distro}

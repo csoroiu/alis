@@ -22,7 +22,7 @@ distro="$2"
 file_name=$(readlink -- "${distro}.zip")
 
 #writing image to disk
-sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
 #patching distro
-sudo "${PROGDIR}/rpi-raspios-patch.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/rpi-raspios-patch.sh" ${device}

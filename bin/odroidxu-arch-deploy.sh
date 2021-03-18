@@ -12,4 +12,4 @@ device=$1
 
 "${PROGDIR}/odroidxu-arch-get.sh"
 sudo "${PROGDIR}/create_partitions.sh" ${device}
-sudo "${PROGDIR}/odroidxu-arch-write.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/odroidxu-arch-write.sh" ${device}

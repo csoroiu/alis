@@ -17,7 +17,7 @@ device="$1"
 file_name="ubuntu-14.04lts-server-odroid-xu-20140714.img.xz"
 
 #writing image to disk
-sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
 #echo ""
 #echo Writing u-boot image
@@ -25,4 +25,4 @@ sudo "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 #partx -v -u ${device}
 
 #patching distro
-sudo "${PROGDIR}/odroidxu-ubuntu-patch.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/odroidxu-ubuntu-patch.sh" ${device}
