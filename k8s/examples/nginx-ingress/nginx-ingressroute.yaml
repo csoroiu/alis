@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  creationTimestamp: null
+  name: nginx-ingress
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: Host(`nginx.slh`) && PathPrefix(`/`)
+    middlewares: []
+    priority: 0
+    services:
+    - kind: Service
+      name: ""
+      namespace: ""
+      port: 0

@@ -1,14 +1,24 @@
 #ansible arch -a "yay -Sy --noconfirm k3s-bin"
 
-#for the master nodes
-#export INSTALL_K3S_VERSION=v1.19.5+k3s2
-export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
+#for the first master node (etcd)
+#export INSTALL_K3S_VERSION=v1.21.1+k3s1
+#export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
+export INSTALL_K3S_EXEC="server --disable servicelb"
+export K3S_TOKEN=<SECRET>
+export K3S_CLUSTER_INIT=true
 curl -sfL https://get.k3s.io | sh -s -
 
+#for the 2nd, 3rd master nodes (etcd)
+export INSTALL_K3S_EXEC="server --disable servicelb"
+export K3S_TOKEN=<SECRET>
+export K3S_URL=https://<first node or clusterip>:6443
+curl -sfL https://get.k3s.io | sh -s -
+
+
 #for the agent nodes
-#export INSTALL_K3S_VERSION=v1.19.5+k3s2
-export K3S_URL=
-export K3S_TOKEN=
+#export INSTALL_K3S_VERSION=v1.21.1+k3s1
+export K3S_TOKEN=<SECRET>
+export K3S_URL=https://<first node or clusterip>:6443
 curl -sfL https://get.k3s.io | sh -s -
 
 #create server
