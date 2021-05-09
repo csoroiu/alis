@@ -1,9 +1,9 @@
 # This HelmChartConfig can be used to patch traefik v2 installation 
 # on k3s to make it us an assigned ip address for metallb.
-#
-# v1: https://github.com/helm/charts/blob/master/stable/traefik/values.yaml 
-# https://github.com/helm/charts/tree/master/stable/traefik
-# deprecated after chart 1.87.5/traefik 1.7.26
+# 
+# The default configuration values can be found here:
+# v2: https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+# v2 documentation can be found here: https://doc.traefik.io/traefik/
 #
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
@@ -14,7 +14,8 @@ metadata:
 spec:
   targetNamespace: kube-system
   valuesContent: |-
-    image: "traefik"
+    image:
+      name: "rancher/library-traefik"
     service:
       annotations:
         metallb.universe.tf/address-pool: expensive    

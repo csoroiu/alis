@@ -3,8 +3,7 @@ kind: IngressRoute
 metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
-  creationTimestamp: null
-  name: nginx-ingress
+  name: nginx-ingressroute
 spec:
   entryPoints: []
   routes:
@@ -14,6 +13,5 @@ spec:
     priority: 0
     services:
     - kind: Service
-      name: ""
-      namespace: ""
-      port: 0
+      name: nginx-service
+      port: 80
