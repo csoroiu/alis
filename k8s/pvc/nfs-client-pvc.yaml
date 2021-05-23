@@ -7,7 +7,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: test-pv-claim
   annotations:
-    volume.beta.kubernetes.io/storage-class: "nfs-client"
+    volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
   labels:
     app: test
 spec:
