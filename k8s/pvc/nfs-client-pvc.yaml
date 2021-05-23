@@ -1,0 +1,18 @@
+#
+# nfs-subdir-external-provisioner
+# https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner/blob/master/charts/nfs-subdir-external-provisioner/README.md 
+#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pv-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "nfs-client"
+  labels:
+    app: test
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
