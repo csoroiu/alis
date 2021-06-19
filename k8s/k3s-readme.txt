@@ -50,16 +50,3 @@ curl -sfL https://get.k3s.io | sh -s -
 # for k3s remove the corresponding entry from /var/lib/rancher/k3s/agent/node-password.txt
 # if you don't remove the entry from the node-password filem you cannot register a new node
 # back with the same name (e.g. machine was replaced)
-
-#list namespaces in containerd/docker socket
-sudo ctr -a /var/run/docker/containerd/containerd.sock ns ls
-
-#list containers in containerd/runc for docker
-sudo ctr -a /var/run/docker/containerd/containerd.sock -n moby c ls
-sudo runc --root /run/docker/runtime-runc/moby list
-
-
-#list namespaces in containerd/kubernetes socket
-sudo ctr -a /run/k3s/containerd/containerd.sock ns ls
-#list containers in containerd/runc for kubernetes
-sudo ctr -a /run/k3s/containerd/containerd.sock -n k8s.io c ls

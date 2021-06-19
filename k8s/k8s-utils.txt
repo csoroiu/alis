@@ -36,7 +36,7 @@ nfs-subdir-external-provisioner - https://github.com/kubernetes-sigs/nfs-subdir-
     --set storageClass.name=managed-nfs-storage
 # helm delete my-release
 
-e.g. 
+e.g.
  kubectl create namespace nfs-provisioner
  helm install -n nfs-provisioner nfs-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
     --set nfs.server=bagend.slh \
@@ -46,5 +46,5 @@ e.g.
     --set replicaCount=2
 e.g. helm delete -n nfs-provisioner nfs-provisioner
 # https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/
-# 
+#
 # kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
