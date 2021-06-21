@@ -29,7 +29,7 @@ pacman -S --noconfirm dtc
 #pacman -S --noconfirm raspberrypi-userland-aarch64-git
 
 #containerd and runc
-pacmnan -S --noconfirm containerd #which uses runc
+pacman -S --noconfirm containerd #which uses runc
 
 #docker stuff
 #packman -S --noconfirm docker

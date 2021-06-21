@@ -30,5 +30,6 @@ function umount_device ( )
 {
     echo ""
     echo Unmounting
+    sync -d ${device}
     umount "${device}"?* || :
 }

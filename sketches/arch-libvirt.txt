@@ -1,0 +1,13 @@
+ansible arch -a "yay -Sy --noconfirm libvirt libvirt-storage-iscsi-direct"
+#qemu/kvm support
+ansible arch -a "yay -Sy --noconfirm qemu qemu-block-iscsi"
+#default networking requirements
+ansible arch -a "yay -Sy --noconfirm ebtables dnsmasq"
+#bridged networking requirements
+ansible arch -a "yay -Sy --noconfirm bridge-utils"
+
+ansible arch -become -a "gpasswd -a alarm libvirt"
+ansible arch -become -a "gpasswd -a alarm kvm"
+ansible arch -become -a "systemctl enable --now libvirtd.service"
+
+#uninstall yay -Rs --noconfirm
