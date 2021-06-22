@@ -71,6 +71,7 @@ cp -r "${PROGDIR}/raspberry" root/home/alarm/bin
 
 echo ""
 echo Unmounting
+sync -d ${device}
 umount boot root
 
 echo "for pi4 run:"
