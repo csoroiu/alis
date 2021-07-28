@@ -1,6 +1,6 @@
 ### build the eeprom
-rpi-eeprom-config --out pieeprom-customconfig-2020-09-03.bin --config eeprom-config.txt \
-   /lib/firmware/raspberrypi/bootloader/stable/pieeprom-2020-09-03.bin
+rpi-eeprom-config --out pieeprom-customconfig-2021-07-06.bin --config eeprom-config.txt \
+   /lib/firmware/raspberrypi/bootloader/stable/pieeprom-2021-07-06.bin
 
 ### update the eeprom
-rpi-eeprom-update -d -f pieeprom-customconfig-2020-09-03.bin
+rpi-eeprom-update -d -f pieeprom-customconfig-2021-07-06.bin
