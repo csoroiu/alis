@@ -5,7 +5,7 @@ readonly ARGS="$@"
 
 . $PROGDIR/download-functions.sh --source-only
 
-LIBREELEC_VERSION=${LIBREELEC_VERSION:=9.2.6}
+LIBREELEC_VERSION=${LIBREELEC_VERSION:=9.2.8}
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name:"
