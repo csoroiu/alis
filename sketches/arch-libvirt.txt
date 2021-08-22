@@ -10,4 +10,6 @@ ansible arch -become -a "gpasswd -a alarm libvirt"
 ansible arch -become -a "gpasswd -a alarm kvm"
 ansible arch -become -a "systemctl enable --now libvirtd.service"
 
+#kvm-ok - from cpu-checker package
+#virt-host-validate
 #uninstall yay -Rs --noconfirm
