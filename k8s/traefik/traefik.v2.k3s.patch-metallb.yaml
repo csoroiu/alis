@@ -15,7 +15,7 @@ spec:
   targetNamespace: kube-system
   valuesContent: |-
     image:
-      name: "rancher/library-traefik"
+      name: "rancher/mirrored-library-traefik"
     service:
       annotations:
         metallb.universe.tf/address-pool: expensive    
