@@ -1,7 +1,7 @@
 #ansible arch -a "yay -Sy --noconfirm k3s-bin"
 
 #for the first master node (etcd)
-#export INSTALL_K3S_VERSION=v1.21.1+k3s1
+#export INSTALL_K3S_VERSION=v1.22.3+k3s1
 #export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
 export INSTALL_K3S_EXEC="server --disable servicelb"
 export K3S_TOKEN=<SECRET>
@@ -16,7 +16,7 @@ curl -sfL https://get.k3s.io | sh -s -
 
 
 #for the agent nodes
-#export INSTALL_K3S_VERSION=v1.21.1+k3s1
+#export INSTALL_K3S_VERSION=v1.22.3+k3s1
 export K3S_TOKEN=<SECRET>
 export K3S_URL=https://<first node or clusterip>:6443
 curl -sfL https://get.k3s.io | sh -s -
