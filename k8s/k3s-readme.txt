@@ -50,3 +50,16 @@ curl -sfL https://get.k3s.io | sh -s -
 # for k3s remove the corresponding entry from /var/lib/rancher/k3s/agent/node-password.txt
 # if you don't remove the entry from the node-password filem you cannot register a new node
 # back with the same name (e.g. machine was replaced)
+
+
+#Deleting labels added by system-upgrade script
+SERVER_PLAN_NAME=k3s-server-v1.22.3-k3s2
+AGENT_PLAN_NAME=k3s-agent-v1.22.3-k3s2
+#delete upgrade plan for server nodes
+k delete -n system-upgrade plan.upgrade.cattle.io/k3s-server-${SERVER_PLAN_NAME}
+#delete upgrade plan for agent nodes
+k delete -n system-upgrade plan.upgrade.cattle.io/k3s-agent-${AGENT_PLAN_NAME}
+#delete label from all server nodes
+k label node -l node-role.kubernetes.io/master plan.upgrade.cattle.io/k3s-server-${SERVER_PLAN_NAME}-
+#delete label from all agent nodes
+k label node -l \!node-role.kubernetes.io/master plan.upgrade.cattle.io/k3s-agent-${AGENT_PLAN_NAME}-
