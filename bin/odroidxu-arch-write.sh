@@ -58,9 +58,11 @@ cp -a root/etc/fstab root/etc/fstab.original
 sed -e 's/0x41f00000/0x44000000/g' -i boot/boot.ini
 
 #to avoid random stuck boot use PARTUUID for rootfs and for boot partision
-ROOT_PARTUUID=$(blkid -o export ${device}2 | grep PARTUUID)
+#boot process does not work with UUID, only with PARTUUID
+ROOT_PARTUUID=$(blkid -o export ${device}2 | grep ^PARTUUID=)
 sed -e "s/\/dev\/mmcblk1p2/${ROOT_PARTUUID}/g" -i boot/boot.ini
-BOOT_PARTUUID=$(blkid -o export ${device}1 | grep PARTUUID)
+#mounting also works with UUID instead of PARTUUID
+BOOT_PARTUUID=$(blkid -o export ${device}1 | grep ^PARTUUID=)
 sed -e "s/\/dev\/mmcblk1p1/${BOOT_PARTUUID}/g" -i root/etc/fstab
 
 cp -a root/etc/locale.gen root/etc/locale.gen.original
