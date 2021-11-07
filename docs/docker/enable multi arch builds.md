@@ -14,7 +14,7 @@ $ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 This is explained here: https://github.com/multiarch/qemu-user-static#usage
 
 ### Preferably
-On **Arch Linux** you may install `binfmt-qemu-static` from **AUR**. 
+On **Arch Linux** you may install `qemu-user-static-bin` from **AUR**. 
 By doing so, you do not need to run the above command every time you need to run
 a multi-arch build.
 
