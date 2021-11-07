@@ -46,8 +46,10 @@ end
 
     echo ""
     echo "Creating and formating the filesystems"
-    mkfs.vfat -F 32 "${device}"1
-    mkfs.ext4 -O ^huge_file -F "${device}"2
+    # boot partition with boot label
+    mkfs.vfat -F 32 -n boot "${device}"1
+    # root partition with rootfs label
+    mkfs.ext4 -O ^huge_file -L rootfs -F "${device}"2
 
     # notify kernel to re-read the partition table
     flock "${device}" partx -v -u "${device}"
