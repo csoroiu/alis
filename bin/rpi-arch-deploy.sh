@@ -1,7 +1,7 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
@@ -16,6 +16,6 @@ fi
 device="$1"
 distro="$2"
 
-"${PROGDIR}/rpi-arch-get.sh" ${distro}
-sudo "${PROGDIR}/create_partitions.sh" ${device}
-sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/rpi-arch-write.sh" ${device} ${distro}
+"${PROGDIR}/rpi-arch-get.sh" "${distro}"
+sudo "${PROGDIR}/create_partitions.sh" "${device}"
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/rpi-arch-write.sh" "${device}" "${distro}"

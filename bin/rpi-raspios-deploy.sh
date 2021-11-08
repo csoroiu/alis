@@ -1,7 +1,7 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
@@ -16,7 +16,7 @@ device="$1"
 distro="$2"
 
 #downloading file
-"${PROGDIR}/rpi-raspios-get.sh" ${distro}
+"${PROGDIR}/rpi-raspios-get.sh" "${distro}"
 
 #real file_name is known only after download
 file_name=$(readlink -- "${distro}.zip")
@@ -25,4 +25,4 @@ file_name=$(readlink -- "${distro}.zip")
 sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
 #patching distro
-sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/rpi-raspios-patch.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/rpi-raspios-patch.sh" "${device}"

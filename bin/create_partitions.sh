@@ -1,7 +1,9 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
+
+. "$PROGDIR"/patch-functions.sh --source-only
 
 function wipe_fs_partx ( )
 {
@@ -24,11 +26,8 @@ function partition ( )
 {
     local device=$1
     echo ""
-    echo "Unmounting all partitions for ${device}" 
 
-    # umount and skip mount errors
-    umount "${device}"?* || :
-
+    umount_device "${device}"
     wipe_fs_partx "${device}"
 
     echo ""
@@ -54,7 +53,7 @@ end
     # notify kernel to re-read the partition table
     flock "${device}" partx -v -u "${device}"
 
-    # partx -v -u ${device}
+    # partx -v -u "${device}"
     # partprobe -s ${device}
     # blockdev --rereadpt -v ${device}
     # hdparm -z ${device}

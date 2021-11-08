@@ -21,25 +21,31 @@ cat='cat -- ${file_name}'
 
 function get_file_extension ( )
 {
-  fullfile=$@
+  local fullfile=$*
+  local filename
+  local extension
   filename=$(basename -- "${fullfile}")
   extension="${filename#*.}"
-  echo .${extension}
+  echo ".${extension}"
 }
 
 function get_file_name_no_extension ( )
 {
-  local fullfile=$@
-  local extension=$(get_file_extension ${fullfile})
-  local filename=${fullfile%${extension}}
-  echo ${filename}
+  local fullfile=$*
+  local extension
+  local filename
+  extension=$(get_file_extension "${fullfile}")
+  filename=${fullfile%${extension}}
+  echo "${filename}"
 }
 
 function get_unpack_toconsole_command_single_file_archive ( )
 {
-  local fullfile=$@
-  local extension=$(get_file_extension ${fullfile})
-  local filename=$(get_file_name_no_extension ${fullfile})
+  local fullfile=$*
+  local extension
+  local filename
+  extension=$(get_file_extension "${fullfile}")
+  filename=$(get_file_name_no_extension "${fullfile}")
   local ret=""
 
   case "$extension" in
@@ -79,6 +85,6 @@ function get_unpack_toconsole_command_single_file_archive ( )
       return 1
     ;;
   esac
-  file_name=${fullfile} envsubst <<< ${ret}
+  file_name=${fullfile} envsubst <<< "${ret}"
   return 0
 }

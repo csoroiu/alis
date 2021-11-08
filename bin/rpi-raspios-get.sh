@@ -1,9 +1,9 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
-. $PROGDIR/download-functions.sh --source-only
+. "$PROGDIR"/download-functions.sh --source-only
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name:"
@@ -14,13 +14,13 @@ fi
 
 distro="$1"
 
-image_url="$(resolve_final_url https://downloads.raspberrypi.org/${distro})"
+image_url="$(resolve_final_url https://downloads.raspberrypi.org/"${distro}")"
 echo ""
 download_if_newer "${image_url}"
 echo ""
 download_if_newer "${image_url}.sha256"
 
-image_name="$(get_file_name_from_url ${image_url})"
+image_name="$(get_file_name_from_url "${image_url}")"
 image_sha256="${image_name}.sha256"
 
 echo ""

@@ -1,7 +1,7 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
 LIBREELEC_VERSION=${LIBREELEC_VERSION:=9.2.6}
 
@@ -18,7 +18,7 @@ fi
 device="$1"
 distro="$2"
 
-"${PROGDIR}/rpi-libreELEC-get.sh" ${distro}
+"${PROGDIR}/rpi-libreELEC-get.sh" "${distro}"
 
 #real file_name is known only after download
 file_name="LibreELEC-${distro}.arm-${LIBREELEC_VERSION}.img.gz"

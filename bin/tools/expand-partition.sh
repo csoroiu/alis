@@ -1,7 +1,7 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
@@ -25,13 +25,13 @@ else
 fi
 
 echo "Running a check"
-flock "${device}" e2fsck -y -f ${partition} -E fixes_only
+flock "${device}" e2fsck -y -f "${partition}" -E fixes_only
 
 echo "Modifying partition table"
-echo ", +" | flock "${device}" sfdisk -N ${partition_no} ${device}
+echo ", +" | flock "${device}" sfdisk -N "${partition_no}" "${device}"
 
 echo "Resizing the filesystem"
-flock "${device}" resize2fs -p ${partition}
+flock "${device}" resize2fs -p "${partition}"
 
 #notifying kernel about the changes
 flock "${device}" partx -v -u "${device}"

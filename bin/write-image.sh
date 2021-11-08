@@ -1,23 +1,21 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
-. $PROGDIR/archive-functions.sh --source-only
+. "$PROGDIR"/archive-functions.sh --source-only
+. "$PROGDIR"/patch-functions.sh --source-only
 
 function write_image ( )
 {
     local device=$1
     local file_name=$2
-    echo ""
-    echo "Unmounting all partitions for ${device}"
-    #skip mount errors
-    umount "${device}"?* || :
+    umount_device "${device}"
     echo ""
     echo "Unpacking and writing image on sd card"
-    eval $(get_unpack_toconsole_command_single_file_archive ${file_name}) | \
-        dd bs=4M of=${device} conv=fsync status=progress
-    partx -v -u ${device} || :
+    eval "$(get_unpack_toconsole_command_single_file_archive "${file_name}")" | \
+        dd bs=4M of="${device}" conv=fsync status=progress
+    partx -v -u "${device}" || :
 }
 
 

@@ -1,9 +1,9 @@
 #!/bin/bash
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
-. $PROGDIR/patch-functions.sh --source-only
+. "$PROGDIR"/patch-functions.sh --source-only
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the device where to write the image."
@@ -27,10 +27,10 @@ touch boot/ssh
 cp -a root/etc/locale.gen root/etc/locale.gen.original
 uncomment_line "^#en_US" root/etc/locale.gen
 
-if [[ ! -z ${ALIS_DEPLOY_HOSTNAME} ]]; then
+if [[ -n ${ALIS_DEPLOY_HOSTNAME} ]]; then
     cp -a root/etc/hostname root/etc/hostname.original
     echo "Setting hostname to \"${ALIS_DEPLOY_HOSTNAME}\""
-    echo ${ALIS_DEPLOY_HOSTNAME} > root/etc/hostname
+    echo "${ALIS_DEPLOY_HOSTNAME}" > root/etc/hostname
 else
     echo "Using default hostname \"$(cat root/etc/hostname)\""
 fi

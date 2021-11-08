@@ -1,7 +1,7 @@
-#!/bin/bash
-readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
-readonly ARGS="$@"
+#!/bin/bash -e
+readonly PROGNAME=$(basename "$0")
+readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
+readonly ARGS="$*"
 
 # https://www.tecmint.com/install-yay-aur-helper-in-arch-linux-and-manjaro/
 # install yay

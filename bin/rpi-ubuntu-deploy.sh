@@ -1,7 +1,7 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
 UBUNTU_VERSION=${UBUNTU_VERSION:=21.10}
 
@@ -20,7 +20,7 @@ distro="$2"
 
 
 #downloading file
-"${PROGDIR}/rpi-ubuntu-get.sh" ${distro}
+"${PROGDIR}/rpi-ubuntu-get.sh" "${distro}"
 
 #real file_name is known only after download
 file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-${distro}+raspi.img.xz"
@@ -29,4 +29,4 @@ file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-${distro}+raspi.img.xz"
 sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,UBUNTU_VERSION "${PROGDIR}/write-image.sh" "${device}" "${file_name}"
 
 #patching distro
-sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,UBUNTU_VERSION "${PROGDIR}/rpi-ubuntu-patch.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME,UBUNTU_VERSION "${PROGDIR}/rpi-ubuntu-patch.sh" "${device}"

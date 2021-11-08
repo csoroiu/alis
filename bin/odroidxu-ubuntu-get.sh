@@ -1,9 +1,9 @@
 #!/bin/bash
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
-. $PROGDIR/download-functions.sh --source-only
+. "$PROGDIR"/download-functions.sh --source-only
 
 #downloading the xu-boot binary
 #dd if=odroidxu-uboot.img of=${device} bs=512 seek=1

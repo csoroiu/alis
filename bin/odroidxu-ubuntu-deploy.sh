@@ -1,7 +1,7 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
 if [[ $# -eq 0 ]]; then
     echo "No arguments provided"
@@ -22,7 +22,7 @@ sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/write-image.sh" "${device}"
 #echo ""
 #echo Writing u-boot image
 #dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
-#partx -v -u ${device}
+#partx -v -u "${device}"
 
 #patching distro
-sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/odroidxu-ubuntu-patch.sh" ${device}
+sudo --preserve-env=ALIS_DEPLOY_HOSTNAME "${PROGDIR}/odroidxu-ubuntu-patch.sh" "${device}"

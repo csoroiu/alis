@@ -1,9 +1,9 @@
 #!/bin/bash -e
-readonly PROGNAME=$(basename $0)
+readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$@"
+readonly ARGS="$*"
 
-. $PROGDIR/download-functions.sh --source-only
+. "$PROGDIR"/download-functions.sh --source-only
 
 LIBREELEC_VERSION=${LIBREELEC_VERSION:=10.0.1}
 
@@ -18,11 +18,11 @@ fi
 distro="$1"
 
 url="http://releases.libreelec.tv/LibreELEC-${distro}.arm-${LIBREELEC_VERSION}.img.gz"
-file_name="$(get_file_name_from_url ${url})"
+file_name="$(get_file_name_from_url "${url}")"
 image_sha256="${file_name}.sha256"
 
 echo ""
-download_if_newer ${url}
+download_if_newer "${url}"
 echo ""
 download_if_newer "${url}.sha256"
 
