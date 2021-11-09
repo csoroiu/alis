@@ -20,9 +20,9 @@ file_name="$(get_file_name_from_url "${url}")"
 
 #The mirror in greece does not answer with the file's timestamp
 echo ""
-download_if_newer_arch "${url}"
+download_if_newer_arch_linux "${url}"
 echo ""
-download_if_newer_arch "${url}.md5"
+download_if_newer_arch_linux "${url}.md5"
 
 echo ""
 echo "Checking md5 sum"

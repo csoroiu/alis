@@ -12,11 +12,11 @@ download_if_newer http://s3.armhf.com/dist/odroid/odroidxu-uboot.img
 
 #The mirror in greece does not answer with the file's timestamp
 echo ""
-download_if_newer_arch http://os.archlinuxarm.org/os/exynos/xuboot.img
+download_if_newer_arch_linux http://os.archlinuxarm.org/os/exynos/xuboot.img
 echo ""
-download_if_newer_arch http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz
+download_if_newer_arch_linux http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz
 echo ""
-download_if_newer_arch http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz.md5
+download_if_newer_arch_linux http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz.md5
 
 echo ""
 echo "Checking md5 sum"

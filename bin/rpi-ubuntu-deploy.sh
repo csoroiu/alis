@@ -15,6 +15,11 @@ if [[ $# -ne 2 ]]; then
     exit 1
 fi
 
+if [[ "$EUID" -eq 0 ]]; then
+  echo "Do not run this script as root."
+  exit
+fi
+
 device="$1"
 distro="$2"
 
