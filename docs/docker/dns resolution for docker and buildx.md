@@ -10,7 +10,7 @@ This can be enabled by adding an extra interface inside the file `/etc/systemd/r
 DNSStubListenerExtra=172.17.0.1
 ```
 Now restart the service:
-```bash
+```shell
 $ systemctl restart systemd-resolved.service
 ```
 
@@ -23,7 +23,7 @@ This can be done by adding the dns in the list of dns that docker uses in the fi
 ```
 
 Now restart the docker daemon:
-```bash
+```shell
 $ systemctl restart docker.service
 ```
 

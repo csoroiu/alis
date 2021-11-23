@@ -25,14 +25,14 @@ pacman -S --noconfirm bash-completion
 #pacman -S --noconfirm playerctl
 pacman -S --noconfirm usbutils
 #device tree compiler
-pacman -S --noconfirm dtc
-#pacman -S --noconfirm raspberrypi-userland-aarch64-git
+pacman -S --noconfirm dtc uboot-tools
+#pacman -S --noconfirm rpi-eeprom
 
 #containerd and runc
 pacman -S --noconfirm containerd #which uses runc
 
 #docker stuff
-#packman -S --noconfirm docker
+#pacman -S --noconfirm docker
 #gpasswd -a alarm docker
 #systemctl enable docker.socket
 #systemctl enable docker.service
