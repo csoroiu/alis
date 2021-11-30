@@ -28,7 +28,7 @@ function mount_boot_root ( )
 
 function umount_device ( )
 {
-    local devices="$*"
+    local devices="$@"
 
     echo ""
     echo "Syncing ${devices}"

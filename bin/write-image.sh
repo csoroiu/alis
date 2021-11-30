@@ -31,4 +31,4 @@ if [[ "$EUID" -ne 0 ]]; then
   exit
 fi
 
-write_image "$*"
+write_image "$@"

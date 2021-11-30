@@ -5,7 +5,7 @@
 **Containerd** that comes with docker has the default address:
 `/run/docker/containerd/containerd.sock`
 
-**Containerd** that you install from official repositories 
+**Containerd** that you install from official repositories
 has the default address: `/run/containerd/containerd.sock`
 
 ## List namespaces from a containerd socket

@@ -21,7 +21,7 @@ cat='cat -- ${file_name}'
 
 function get_file_extension ( )
 {
-  local fullfile=$*
+  local fullfile="$*"
   local filename
   local extension
   filename=$(basename -- "${fullfile}")
@@ -31,7 +31,7 @@ function get_file_extension ( )
 
 function get_file_name_no_extension ( )
 {
-  local fullfile=$*
+  local fullfile="$*"
   local extension
   local filename
   extension=$(get_file_extension "${fullfile}")
@@ -41,7 +41,7 @@ function get_file_name_no_extension ( )
 
 function get_unpack_toconsole_command_single_file_archive ( )
 {
-  local fullfile=$*
+  local fullfile="$*"
   local extension
   local filename
   extension=$(get_file_extension "${fullfile}")
