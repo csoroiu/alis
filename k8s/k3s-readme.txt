@@ -53,13 +53,13 @@ curl -sfL https://get.k3s.io | sh -s -
 
 
 #Deleting labels added by system-upgrade script
-SERVER_PLAN_NAME=k3s-server-v1.22.3-k3s2
-AGENT_PLAN_NAME=k3s-agent-v1.22.3-k3s2
+SERVER_PLAN_NAME=k3s-server-v1.22.4-k3s1
+AGENT_PLAN_NAME=k3s-agent-v1.22.4-k3s1
 #delete upgrade plan for server nodes
-k delete -n system-upgrade plan.upgrade.cattle.io/k3s-server-${SERVER_PLAN_NAME}
+k delete -n system-upgrade plan.upgrade.cattle.io/${SERVER_PLAN_NAME}
 #delete upgrade plan for agent nodes
-k delete -n system-upgrade plan.upgrade.cattle.io/k3s-agent-${AGENT_PLAN_NAME}
+k delete -n system-upgrade plan.upgrade.cattle.io/${AGENT_PLAN_NAME}
 #delete label from all server nodes
-k label node -l node-role.kubernetes.io/master plan.upgrade.cattle.io/k3s-server-${SERVER_PLAN_NAME}-
+k label node -l node-role.kubernetes.io/master plan.upgrade.cattle.io/${SERVER_PLAN_NAME}-
 #delete label from all agent nodes
-k label node -l \!node-role.kubernetes.io/master plan.upgrade.cattle.io/k3s-agent-${AGENT_PLAN_NAME}-
+k label node -l \!node-role.kubernetes.io/master plan.upgrade.cattle.io/${AGENT_PLAN_NAME}-
