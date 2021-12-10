@@ -22,11 +22,11 @@ mount_boot_root "${device}"
 #Patch code goes below
 echo ""
 echo "Patching files"
-
 #touch boot/ssh
 
 #cp -a root/etc/locale.gen root/etc/locale.gen.original
 #uncomment_line "^#en_US" root/etc/locale.gen
+
 #if [[ -n ${ALIS_DEPLOY_HOSTNAME} ]]; then
 #    cp -a root/etc/hostname root/etc/hostname.original
 #    echo "Setting hostname to \"${ALIS_DEPLOY_HOSTNAME}\""

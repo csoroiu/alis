@@ -40,5 +40,3 @@ echo "  Username: root"
 echo "  Password: odroid"
 
 umount_device "${device}"
-
-
