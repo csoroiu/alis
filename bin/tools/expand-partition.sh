@@ -1,7 +1,7 @@
 #!/bin/bash -e
 readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$*"
+readonly ARGS=("$@")
 
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."

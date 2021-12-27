@@ -1,7 +1,7 @@
 #!/bin/bash -e
 readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$*"
+readonly ARGS=("$@")
 
 UBUNTU_VERSION=${UBUNTU_VERSION:=21.10}
 

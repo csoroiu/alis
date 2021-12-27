@@ -1,7 +1,7 @@
 #!/bin/bash -e
 readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$*"
+readonly ARGS=("$@")
 
 LIBREELEC_VERSION=${LIBREELEC_VERSION:=9.2.6}
 

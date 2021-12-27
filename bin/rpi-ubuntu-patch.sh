@@ -1,7 +1,7 @@
 #!/bin/bash
 readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$*"
+readonly ARGS=("$@")
 
 . "$PROGDIR"/patch-functions.sh --source-only
 

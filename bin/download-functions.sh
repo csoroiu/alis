@@ -7,7 +7,7 @@ function resolve_final_url ( )
 
 function get_arch_linux_mirror ( )
 {
-    local parent="$@"
+    local parent="$*"
     local mirror=
     for i in $(seq 1 30); do
         mirror=$(resolve_final_url "${parent}")

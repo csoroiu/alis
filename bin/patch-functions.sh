@@ -28,14 +28,12 @@ function mount_boot_root ( )
 
 function umount_device ( )
 {
-    local devices="$@"
-
     echo ""
-    echo "Syncing ${devices}"
-    sync -d "${devices}"
-    echo "Unmounting all mounted partitions for ${devices}"
+    echo "Syncing" "$@"
+    sync -d "$@"
+    echo "Unmounting all mounted partitions for" "$@"
     # find mounted devices using findmnt - skip errors (findmnt exits with error if partition is not mounted)
-    sfdisk -l "${devices}" -o device -q | grep "^/dev" | xargs -r -n1 findmnt -rno SOURCE || :
+    sfdisk -l "$@" -o device -q | grep "^/dev" | xargs -r -n1 findmnt -rno SOURCE || :
     # find mounted devices using findmnt
-    sfdisk -l "${devices}" -o device -q | grep "^/dev" | xargs -r -n1 findmnt -rno SOURCE | xargs -r umount
+    sfdisk -l "$@" -o device -q | grep "^/dev" | xargs -r -n1 findmnt -rno SOURCE | xargs -r umount
 }

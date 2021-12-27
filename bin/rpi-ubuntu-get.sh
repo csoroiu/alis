@@ -1,7 +1,7 @@
 #!/bin/bash -e
 readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
-readonly ARGS="$*"
+readonly ARGS=("$@")
 
 . "$PROGDIR"/download-functions.sh --source-only
 
@@ -23,7 +23,7 @@ sha256sums_file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-raspi.img.xz.
 echo ""
 download_if_newer "${image_url}"
 echo ""
-download_if_newer "-O ${sha256sums_file_name} ${sha256sums_url}"
+download_if_newer -O "${sha256sums_file_name}" "${sha256sums_url}"
 
 echo ""
 echo "Checking sha256 sum"
