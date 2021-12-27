@@ -1,4 +1,4 @@
-# kubectl apply -f https://raw.githubusercontent.com/rancher/system-upgrade-controller/master/manifests/system-upgrade-controller.yaml
+# kubectl apply -f https://github.com/rancher/system-upgrade-controller/releases/latest/download/system-upgrade-controller.yaml
 #
 # These plans are adapted from work by Dax McDonald (https://github.com/daxmc99) and Hussein Galal (https://github.com/galal-hussein)
 # in support of Rancher v2 managed k3s upgrades. See Also: https://rancher.com/docs/k3s/latest/en/upgrades/automated/
@@ -6,13 +6,13 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-server-v1.22.4-k3s1
+  name: k3s-server-v1.22.5-k3s1
   namespace: system-upgrade
   labels:
     k3s-upgrade: server
 spec:
   concurrency: 2
-  version: v1.22.4+k3s1
+  version: v1.22.5+k3s1
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -30,13 +30,13 @@ spec:
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-agent-v1.22.4-k3s1
+  name: k3s-agent-v1.22.5-k3s1
   namespace: system-upgrade
   labels:
     k3s-upgrade: agent
 spec:
   concurrency: 2 # in general, this should be the number of workers - 1
-  version: v1.22.4+k3s1
+  version: v1.22.5+k3s1
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -47,9 +47,9 @@ spec:
   serviceAccountName: system-upgrade
   prepare:
     # Since v0.5.0-m1 SUC will use the resolved version of the plan for the tag on the prepare container.
-    # image: rancher/k3s-upgrade:v1.22.4+k3s1
+    # image: rancher/k3s-upgrade:v1.22.5+k3s1
     image: rancher/k3s-upgrade
-    args: ["prepare", "k3s-server-v1.22.4-k3s1"]
+    args: ["prepare", "k3s-server-v1.22.5-k3s1"]
   drain:
     force: true
     skipWaitForDeleteTimeout: 60 # set this to prevent upgrades from hanging on small clusters since k8s v1.18
