@@ -15,10 +15,13 @@ echo ""
 download_if_newer_arch_linux http://os.archlinuxarm.org/os/exynos/xuboot.img
 echo ""
 download_if_newer_arch_linux http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz
+#download_if_newer_arch_linux http://os.archlinuxarm.org/os/ArchLinuxARM-armv7-latest.tar.gz
 echo ""
 download_if_newer_arch_linux http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu-latest.tar.gz.md5
+#download_if_newer_arch_linux http://os.archlinuxarm.org/os/ArchLinuxARM-armv7-latest.tar.gz.md5
 
 echo ""
 echo "Checking md5 sum"
 md5sum -c ArchLinuxARM-odroid-xu-latest.tar.gz.md5
+#md5sum -c ArchLinuxARM-armv7-latest.tar.gz.md5
 

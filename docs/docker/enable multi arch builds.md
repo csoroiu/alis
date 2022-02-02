@@ -43,6 +43,10 @@ In order to start a `dind` node run:
 
 `docker run -d --platform linux/amd64 --rm --privileged --name dind -e DOCKER_TLS_CERTDIR= -p 2375-2376:2375-2376 docker:dind`
 
+Arm variant fails with error `level=error msg="failure getting variant" error="getCPUInfo for pattern: Cpu architecture: not found"`.
+`docker run -d --platform linux/arm64 --rm --privileged --name dind -e DOCKER_TLS_CERTDIR= -p 2375:2375 -p 2376:2376 docker:dind`.
+Basically `containerd` fails.
+
 In order to add a builder instance with a remote node to buildx run:
 
 - `docker buildx create --name remote  tcp://127.0.0.1:2375`

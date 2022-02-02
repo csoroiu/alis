@@ -33,6 +33,8 @@ mount "${device}"2 root
 echo ""
 echo "Unpacking the image"
 bsdtar -xpf ArchLinuxARM-odroid-xu-latest.tar.gz -C root
+#when using generic image, fstab and boot ini must be provided
+#bsdtar -xpf ArchLinuxARM-armv7-latest.tar.gz -C root
 sync -d "${device}"
 
 mv root/boot/* boot
