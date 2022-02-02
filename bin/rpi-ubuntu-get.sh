@@ -19,7 +19,7 @@ image_url="http://cdimage.ubuntu.com/releases/${UBUNTU_VERSION}/release/ubuntu-$
 file_name="$(get_file_name_from_url "${image_url}")"
 sha256sums_url="http://cdimage.ubuntu.com/releases/${UBUNTU_VERSION}/release/SHA256SUMS"
 
-sha256sums_file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-raspi.img.xz.sha256"
+sha256sums_file_name="ubuntu-${UBUNTU_VERSION}-preinstalled-server-${distro}+raspi.img.xz.sha256"
 echo ""
 download_if_newer "${image_url}"
 echo ""

@@ -9,8 +9,8 @@ if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
-    echo " armhf: for rpi-2,3,4"
-    echo " arm64: for rpi-3,4"
+    echo " armhf: for rpi-2,3,4,400"
+    echo " arm64: for rpi-3,4,400"
     echo "The UBUNTU_VERSION variable controls the version to deploy."
     exit 1
 fi
