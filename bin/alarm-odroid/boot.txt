@@ -7,7 +7,8 @@
 # boot.ini identification
 #
 #------------------------------------------------------------------------------------------------------
-ODROIDXU-UBOOT-CONFIG
+# After modifying, run ./mkscr
+#ODROIDXU-UBOOT-CONFIG
 
 # Verify if u-boot is up-to-date
 setenv hk_current_version "2"
@@ -117,7 +118,7 @@ setenv led_blink    "1"
 #  
 #------------------------------------------------------------------------------------------------------
 # Arch Linux ARM
-setenv bootcmd "fatload mmc 0:1 0x40008000 zImage; if fatload mmc 0:1 0x41f00000 dtbs/exynos5410-odroidxu.dtb; then bootz 0x40008000 - 0x41f00000; else bootz 0x40008000; fi"
+setenv bootcmd "fatload mmc 0:1 0x40008000 zImage; if fatload mmc 0:1 0x44000000 dtbs/exynos5410-odroidxu.dtb; then bootz 0x40008000 - 0x44000000; else bootz 0x40008000; fi"
 
 #------------------------------------------------------------------------------------------------------
 #

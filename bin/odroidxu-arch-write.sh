@@ -32,20 +32,19 @@ mount "${device}"2 root
 
 echo ""
 echo "Unpacking the image"
-bsdtar -xpf ArchLinuxARM-odroid-xu-latest.tar.gz -C root
-#when using generic image, fstab and boot ini must be provided
-#bsdtar -xpf ArchLinuxARM-armv7-latest.tar.gz -C root
+bsdtar -xpf ArchLinuxARM-armv7-latest.tar.gz -C root
 sync -d "${device}"
 
 mv root/boot/* boot
 
 echo ""
 echo "Patching files"
+#copy our boot.ini
+cp "${PROGDIR}/alarm-odroid/boot.ini" boot/boot.ini
 cp -a boot/boot.ini boot/boot.ini.original
-cp -a root/etc/fstab root/etc/fstab.original
 
-#patching the address for fdt
-sed -e 's/0x41f00000/0x44000000/g' -i boot/boot.ini
+cp "${PROGDIR}/alarm-odroid/fstab" root/etc/fstab
+cp -a root/etc/fstab root/etc/fstab.original
 
 #to avoid random stuck boot use PARTUUID for rootfs and for boot partision
 #boot process does not work with UUID, only with PARTUUID
