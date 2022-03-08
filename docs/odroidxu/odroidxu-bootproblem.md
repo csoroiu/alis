@@ -64,6 +64,13 @@ $ blkid /dev/sda2 -o export | grep PARTUUID
 PARTUUID=8477a483-02
 ```
 
+# Resources
+1. [Updating u-boot to recent version][odroidxu-stuck-at-boot]
+2. [Hardkernel Odroid XU U-Boot README][odroidxu-archlinux-tarball]
+3. [Old ArchLinuxARM Packages/Kernels][old-linux-packages]
+
 [odroidxu-archlinux-tarball]: https://archlinuxarm.org/platforms/armv7/samsung/odroid-xu
 [odroidxu-stuck-at-boot]: https://archlinuxarm.org/forum/viewtopic.php?f=47&t=15645&sid=774fc0aa57a2750902ef86eaf1f75a40
+[old-linux-packages]: http://tardis.tiny-vps.com/aarm/packages/l/linux-armv7/
+
 
