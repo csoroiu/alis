@@ -53,8 +53,8 @@ curl -sfL https://get.k3s.io | sh -s -
 
 
 #Deleting labels added by system-upgrade script
-SERVER_PLAN_NAME=k3s-server-v1.23.4-k3s1
-AGENT_PLAN_NAME=k3s-agent-v1.23.4-k3s1
+SERVER_PLAN_NAME=k3s-server-v1.23.5-k3s1
+AGENT_PLAN_NAME=k3s-agent-v1.23.5-k3s1
 #delete upgrade plan for server nodes
 k delete -n system-upgrade plan.upgrade.cattle.io/${SERVER_PLAN_NAME}
 #delete upgrade plan for agent nodes
