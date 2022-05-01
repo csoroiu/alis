@@ -49,6 +49,8 @@ A very useful readme can also be found [there][nfs-provisioner-readme].
 
 ### Examples
 #### Install
+On Ubuntu: `apt-get install nfs-common`
+
 ```
 e.g.
  kubectl create namespace nfs-provisioner

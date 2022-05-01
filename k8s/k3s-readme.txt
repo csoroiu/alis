@@ -1,14 +1,18 @@
 #ansible arch -a "yay -Sy --noconfirm k3s-bin"
+# as of https://github.com/k3s-io/k3s/issues/4234#issuecomment-947954002
+#on Ubuntu >=21.10 'linux-modules-extra-raspi' has to be installed otherwise vxlan/flannel won't work
+#also `nfs-common` has to be installed for nfs-provisioner
 
 #for the first master node (etcd)
-#export INSTALL_K3S_VERSION=v1.22.3+k3s1
-#export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
+#### export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
+#export INSTALL_K3S_VERSION=v1.23.5+k3s1
 export INSTALL_K3S_EXEC="server --disable servicelb"
 export K3S_TOKEN=<SECRET>
 export K3S_CLUSTER_INIT=true
 curl -sfL https://get.k3s.io | sh -s -
 
 #for the 2nd, 3rd master nodes (etcd)
+#export INSTALL_K3S_VERSION=v1.23.5+k3s1
 export INSTALL_K3S_EXEC="server --disable servicelb"
 export K3S_TOKEN=<SECRET>
 export K3S_URL=https://<first node or clusterip>:6443
@@ -16,7 +20,7 @@ curl -sfL https://get.k3s.io | sh -s -
 
 
 #for the agent nodes
-#export INSTALL_K3S_VERSION=v1.22.3+k3s1
+#export INSTALL_K3S_VERSION=v1.23.5+k3s1
 export K3S_TOKEN=<SECRET>
 export K3S_URL=https://<first node or clusterip>:6443
 curl -sfL https://get.k3s.io | sh -s -
@@ -33,6 +37,7 @@ curl -sfL https://get.k3s.io | sh -s -
 #add worker role to single node
 #kubectl label node kube2 node-role.kubernetes.io/worker=true
 
+### after adding  a node
 #kubectl label nodes k3s-upgrade=true --all
 
 #taint all nodes with a label
@@ -41,8 +46,8 @@ curl -sfL https://get.k3s.io | sh -s -
 #kubectl taint nodes odroid k3s-controlplane=true:NoSchedule
 
 # for removing a node, safest way is to:
-# cordon the node
-# if drain fails, taint the node with NoeExecute
+# drain the node (or cordon)
+# if drain fails, taint the node with NoExecute
 # wait for pods to be moved away
 # stop the service on the node
 # remove the node 
@@ -50,7 +55,7 @@ curl -sfL https://get.k3s.io | sh -s -
 # for k3s remove the corresponding entry from /var/lib/rancher/k3s/agent/node-password.txt
 # if you don't remove the entry from the node-password filem you cannot register a new node
 # back with the same name (e.g. machine was replaced)
-
+# also, as a helper, if an etcd node cannot be added back - https://github.com/k3s-io/k3s/issues/2732#issuecomment-749484037
 
 #Deleting labels added by system-upgrade script
 SERVER_PLAN_NAME=k3s-server-v1.23.5-k3s1
