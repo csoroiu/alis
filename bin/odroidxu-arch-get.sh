@@ -7,7 +7,7 @@ readonly ARGS=("$@")
 
 #downloading the xu-boot binary
 echo ""
-download_if_newer http://s3.armhf.com/dist/odroid/odroidxu-uboot.img
+download_if_newer https://s3.armhf.com/dist/odroid/odroidxu-uboot.img
 #dd if=odroidxu-uboot.img of=${device} bs=512 seek=1
 
 #The mirror in greece does not answer with the file's timestamp
