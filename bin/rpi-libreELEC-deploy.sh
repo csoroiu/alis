@@ -10,7 +10,7 @@ if [[ $# -ne 2 ]]; then
     echo "First argument needs to be the device where to write the image"
     echo "Second argument needs to be the distro name:"
     echo " RPi2: for rpi-2 and rpi-3"
-    echo " RPi4: for rpi-4, pi-400, cm4"
+    echo " RPi4: for rpi-4,400,cm4"
     echo "The LIBREELEC_VERSION variable controls the version to deploy."
     exit 1
 fi
