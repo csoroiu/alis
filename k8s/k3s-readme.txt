@@ -5,14 +5,14 @@
 
 #for the first master node (etcd)
 #### export INSTALL_K3S_EXEC="server --disable servicelb --disable traefik"
-#export INSTALL_K3S_VERSION=v1.23.5+k3s1
+#export INSTALL_K3S_VERSION=v1.25.3+k3s1
 export INSTALL_K3S_EXEC="server --disable servicelb"
 export K3S_TOKEN=<SECRET>
 export K3S_CLUSTER_INIT=true
 curl -sfL https://get.k3s.io | sh -s -
 
 #for the 2nd, 3rd master nodes (etcd)
-#export INSTALL_K3S_VERSION=v1.23.5+k3s1
+#export INSTALL_K3S_VERSION=v1.25.3+k3s1
 export INSTALL_K3S_EXEC="server --disable servicelb"
 export K3S_TOKEN=<SECRET>
 export K3S_URL=https://<first node or clusterip>:6443
@@ -20,7 +20,7 @@ curl -sfL https://get.k3s.io | sh -s -
 
 
 #for the agent nodes
-#export INSTALL_K3S_VERSION=v1.23.5+k3s1
+#export INSTALL_K3S_VERSION=v1.25.3+k3s1
 export K3S_TOKEN=<SECRET>
 export K3S_URL=https://<first node or clusterip>:6443
 curl -sfL https://get.k3s.io | sh -s -
@@ -62,8 +62,8 @@ kubectl run --rm --tty --stdin --image docker.io/rancher/coreos-etcd etcdctl --o
 
 
 #Deleting labels added by system-upgrade script
-SERVER_PLAN_NAME=k3s-server-v1.25.0-k3s1
-AGENT_PLAN_NAME=k3s-agent-v1.25.0-k3s1
+SERVER_PLAN_NAME=k3s-server-v1.25.3-k3s1
+AGENT_PLAN_NAME=k3s-agent-v1.25.3-k3s1
 #delete upgrade plan for server nodes
 k delete -n system-upgrade plan.upgrade.cattle.io/${SERVER_PLAN_NAME}
 #delete upgrade plan for agent nodes
