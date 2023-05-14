@@ -11,6 +11,9 @@ setenv bootrootfs "console=ttySAC2,115200n8 root=/dev/mmcblk1p2 rootwait rw"
 ```
 
 Sample 1 - **mmc1** is assigned to 12220000:
+```shell
+$ls -l /sys/devices/platform/soc/12220000.mmc/mmc_host/mmc?/
+```
 ```text
 [alarm@odroid ~]$ ls -l /sys/devices/platform/soc/12220000.mmc/mmc_host/mmc?/
 /sys/devices/platform/soc/12220000.mmc/mmc_host/mmc1/:
@@ -23,6 +26,9 @@ lrwxrwxrwx 1 root root    0 Nov 10 17:22 subsystem -> ../../../../../../class/mm
 ```
 
 Sample 2 - **mmc0** is assigned to 12220000:
+```shell
+$ls -l /sys/devices/platform/soc/12220000.mmc/mmc_host/mmc?/
+```
 ```text
 [alarm@odroid ~]$ ls -l /sys/devices/platform/soc/12220000.mmc/mmc_host/mmc?/
 /sys/devices/platform/soc/12220000.mmc/mmc_host/mmc0/:
@@ -36,7 +42,7 @@ lrwxrwxrwx 1 root root    0 Nov 10 17:42 subsystem -> ../../../../../../class/mm
 
 There are 2 solutions to this problem:
 - add aliases to `exynos5410-odroidxu.dtb` device tree:
-```
+```text
 aliases {
 ...
     mmc0 = "/soc/mmc@12200000";
@@ -58,9 +64,9 @@ PARTUUID=8477a483-01  /boot   vfat    defaults        0       0
 ```
 `PARTUUID`'s can be found by running `blkid` for the respective partition:
 ```shell
-$ blkid /dev/sda1 -o export | grep PARTUUID
+$blkid /dev/sda1 -o export | grep PARTUUID
 PARTUUID=8477a483-01
-$ blkid /dev/sda2 -o export | grep PARTUUID
+$blkid /dev/sda2 -o export | grep PARTUUID
 PARTUUID=8477a483-02
 ```
 

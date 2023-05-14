@@ -1,5 +1,5 @@
 # Dns resolution for Docker containers and Buildx (BuildKit)
-The issue is that in order to push the images, the buildx buildkit container needs to have access to
+The issue is that in order to push the images, the buildx BuildKit container needs to have access to
 the ip address of the registry. In order to resolve it, docker must use the dns of the host.
 This cannot be done by referring 127.0.0.53 as ip address for dns, or 127.0.1.1.
 We need to make resolved to bind to docker0 interface.
@@ -11,7 +11,7 @@ DNSStubListenerExtra=172.17.0.1
 ```
 Now restart the service:
 ```shell
-$ systemctl restart systemd-resolved.service
+$systemctl restart systemd-resolved.service
 ```
 
 Next step is to tell docker daemon to use the new DNS.
@@ -24,7 +24,7 @@ This can be done by adding the dns in the list of dns that docker uses in the fi
 
 Now restart the docker daemon:
 ```shell
-$ systemctl restart docker.service
+$systemctl restart docker.service
 ```
 
 Now everything is set to be built.
