@@ -2,8 +2,24 @@
 ### https://github.com/raspberrypi/rpi-eeprom/blob/master/firmware/release-notes.md
 
 ### build the eeprom
-rpi-eeprom-config --out pieeprom-customconfig-2023-01-11.bin --config eeprom-config.txt \
+rpi-eeprom-config --out pieeprom-customconfig-2023-05-11.bin --config eeprom-config.txt \
    /lib/firmware/raspberrypi/bootloader/stable/pieeprom-2023-01-11.bin
 
 ### update the eeprom
-sudo rpi-eeprom-update -d -f pieeprom-customconfig-2023-01-11.bin
+sudo rpi-eeprom-update -d -f pieeprom-customconfig-2023-05-11.bin
+
+
+###
+to find if rapsberry pi4 is BO or CO stepping run the command
+od -An -tx1 /proc/device-tree/emmc2bus/dma-ranges
+
+output should be:
+# B0
+pi@raspberrypi:~$ od -An -tx1 /proc/device-tree/emmc2bus/dma-ranges
+ 00 00 00 00 c0 00 00 00 00 00 00 00 00 00 00 00
+ 40 00 00 00
+
+# C0
+pi@raspberrypi:~$ od -An -tx1 /proc/device-tree/emmc2bus/dma-ranges
+ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ fc 00 00 00

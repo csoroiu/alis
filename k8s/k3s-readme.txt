@@ -61,9 +61,12 @@ curl -sfL https://get.k3s.io | sh -s -
 kubectl run --rm --tty --stdin --image docker.io/rancher/coreos-etcd etcdctl --overrides='{"apiVersion":"v1","kind":"Pod","spec":{"hostNetwork":true,"restartPolicy":"Never","securityContext":{"runAsUser":0,"runAsGroup":0},"containers":[{"command":["/bin/sh"],"image":"docker.io/rancher/coreos-etcd:v3.4.16-arm64","name":"etcdctl","stdin":true,"stdinOnce":true,"tty":true,"volumeMounts":[{"mountPath":"/var/lib/rancher","name":"var-lib-rancher"}]}],"volumes":[{"name":"var-lib-rancher","hostPath":{"path":"/var/lib/rancher","type":"Directory"}}],"nodeSelector":{"node-role.kubernetes.io/etcd":"true"}}}'
 
 
+#Create a new file for upgrade and run, for e.g.:
+#sed -e 's/v1.28.2/v1.28.3/g' -e 's/k3s./k3s1/g' -i k3s-upgrade-1.28.3-k3s1.yaml
+
 #Deleting labels added by system-upgrade script
-SERVER_PLAN_NAME=k3s-server-v1.27.4-k3s1
-AGENT_PLAN_NAME=k3s-agent-v1.27.4-k3s1
+SERVER_PLAN_NAME=k3s-server-v1.28.2-k3s1
+AGENT_PLAN_NAME=k3s-agent-v1.28.2-k3s1
 #delete upgrade plan for server nodes
 k delete -n system-upgrade plan.upgrade.cattle.io/${SERVER_PLAN_NAME}
 #delete upgrade plan for agent nodes
