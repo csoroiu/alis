@@ -7,9 +7,11 @@ readonly ARGS=("$@")
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name:"
-    echo " rpi-2: for 32bit rpi-2 and rpi-3"
-    echo " rpi-4: for 32bit rpi-4"
+    echo " armv7: generic 32bit"
+    echo " aarch64: generic 64bit"
+    echo " rpi-armv7: for 32bit rpi-2,3,4"
     echo " rpi-aarch64: for 64bit rpi-3 and rpi-4"
+    echo " <anything>: for other devices (e.g. odroid-xu, etc.)"
     exit 1
 fi
 

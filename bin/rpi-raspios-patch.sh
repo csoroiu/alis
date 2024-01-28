@@ -37,4 +37,7 @@ fi
 
 cp -r "${PROGDIR}/raspberry" root/home/pi/bin
 
+#setting default user and pass
+echo "pi:$(openssl passwd -6 raspberrypi)" > boot/userconf.txt
+
 umount_device "${device}"

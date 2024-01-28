@@ -5,12 +5,13 @@ readonly ARGS=("$@")
 
 . "$PROGDIR"/download-functions.sh --source-only
 
-LIBREELEC_VERSION=${LIBREELEC_VERSION:=11.0.1}
+LIBREELEC_VERSION=${LIBREELEC_VERSION:=11.0.5}
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name:"
     echo " RPi2: for rpi-2 and rpi-3"
     echo " RPi4: for rpi-4,400,cm4"
+    echo " RPi5: for rpi-5"
     echo "The LIBREELEC_VERSION variable controls the version to deploy."
     exit 1
 fi

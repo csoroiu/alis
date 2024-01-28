@@ -3,7 +3,7 @@ readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS=("$@")
 
-LIBREELEC_VERSION=${LIBREELEC_VERSION:=11.0.1}
+LIBREELEC_VERSION=${LIBREELEC_VERSION:=11.0.5}
 
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."

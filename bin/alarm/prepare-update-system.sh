@@ -26,7 +26,9 @@ pacman -S --noconfirm bash-completion
 pacman -S --noconfirm usbutils
 #device tree compiler
 pacman -S --noconfirm dtc uboot-tools
-#pacman -S --noconfirm rpi-eeprom
+#pacman -S --noconfirm linux-rpi
+#pacman -S --noconfirm rpi4-eeprom
+#pacman -S --noconfirm rpi5-eeprom
 
 #containerd and runc
 pacman -S --noconfirm containerd #which uses runc
