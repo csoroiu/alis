@@ -39,7 +39,7 @@ function get_file_name_no_extension ( )
   echo "${filename}"
 }
 
-function get_unpack_toconsole_command_single_file_archive ( )
+function get_unpack_to_stdout_command_single_file_archive ( )
 {
   local fullfile="$*"
   local extension

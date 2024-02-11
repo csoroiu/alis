@@ -6,13 +6,13 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-server-v1.29.1-k3s1
+  name: k3s-server-v1.29.1-k3s2
   namespace: system-upgrade
   labels:
     k3s-upgrade: server
 spec:
   concurrency: 2 # Batch size (roughly maps to maximum number of unschedulable nodes)
-  version: v1.29.1+k3s1
+  version: v1.29.1+k3s2
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -27,13 +27,13 @@ spec:
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-agent-v1.29.1-k3s1
+  name: k3s-agent-v1.29.1-k3s2
   namespace: system-upgrade
   labels:
     k3s-upgrade: agent
 spec:
   concurrency: 2 # Batch size (roughly maps to maximum number of unschedulable nodes)
-  version: v1.29.1+k3s1
+  version: v1.29.1+k3s2
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}

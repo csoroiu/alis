@@ -13,7 +13,7 @@ function write_image ( )
     umount_device "${device}"
     echo ""
     echo "Unpacking and writing image on sd card"
-    eval "$(get_unpack_toconsole_command_single_file_archive "${file_name}")" | \
+    eval "$(get_unpack_to_stdout_command_single_file_archive "${file_name}")" | \
         dd bs=4M of="${device}" conv=fsync status=progress
     partx -v -u "${device}" || :
 }
