@@ -5,7 +5,7 @@ readonly ARGS=("$@")
 
 . "$PROGDIR"/download-functions.sh --source-only
 
-UBUNTU_VERSION=${UBUNTU_VERSION:=22.04.3}
+UBUNTU_VERSION=${UBUNTU_VERSION:=24.04}
 
 if [[ $# -ne 1 ]]; then
     echo "Invalid arguments provided. Needs to receive the distro name: armhf, arm64"

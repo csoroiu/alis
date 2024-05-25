@@ -1,7 +1,8 @@
+# https://www.jeffgeerling.com/blog/2023/reducing-raspberry-pi-5s-power-consumption-140x
 [all]
-BOOT_UART=0
-WAKE_ON_GPIO=1
-POWER_OFF_ON_HALT=0
+BOOT_UART=1
+WAKE_ON_GPIO=0
+POWER_OFF_ON_HALT=1
 DHCP_TIMEOUT=45000
 DHCP_REQ_TIMEOUT=4000
 TFTP_FILE_TIMEOUT=30000
