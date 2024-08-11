@@ -62,11 +62,11 @@ kubectl run --rm --tty --stdin --image docker.io/rancher/coreos-etcd etcdctl --o
 
 
 #Create a new file for upgrade and run, for e.g.:
-#sed -e 's/v1.30.2\([-+]\)/v1.30.3\1/g' -e 's/k3s[0-9]$/k3s1/g' -i k3s-upgrade-1.30.3-k3s1.yaml
+#sed -e 's/v1.30.3\([-+]\)/v1.30.4\1/g' -e 's/k3s[0-9]$/k3s1/g' -i k3s-upgrade-1.30.4-k3s1.yaml
 
 #Deleting labels added by system-upgrade script
-SERVER_PLAN_NAME=k3s-server-v1.30.2-k3s1
-AGENT_PLAN_NAME=k3s-agent-v1.30.2-k3s1
+SERVER_PLAN_NAME=k3s-server-v1.30.3-k3s1
+AGENT_PLAN_NAME=k3s-agent-v1.30.3-k3s1
 #delete upgrade plan for server nodes
 k delete -n system-upgrade plan.upgrade.cattle.io/${SERVER_PLAN_NAME}
 #delete upgrade plan for agent nodes
