@@ -2,22 +2,22 @@
 ### Install on arm64:
 Run:
 ```shell
-$curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/arm64/kubectl"
-$sudo install kubectl /usr/local/bin
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/arm64/kubectl"
+sudo install kubectl /usr/local/bin
 ```
 
 ### Install on amd64:
 Run:
 ```shell
-$curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-$sudo install kubectl /usr/local/bin
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install kubectl /usr/local/bin
 ```
 
 ### Enable bash completion
 Run:
 ```shell
-$mkdir -p ~/.kubectl
-$kubectl completion bash >~/.kubectl/kubectl.completion.bash.inc
+mkdir -p ~/.kubectl
+kubectl completion bash >~/.kubectl/kubectl.completion.bash.inc
 ```
 Inside `~/.bashrc` add: 
 ```shell
@@ -32,14 +32,14 @@ complete -F __start_kubectl k
 Git repository is: https://github.com/helm/helm.
 Run:
 ```shell
-$curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 ```
 
 ### Enable bash completion
 Run:
 ```shell
-$mkdir -p ~/.kubectl
-$helm completion bash >~/.kubectl/helm.completion.bash.inc
+mkdir -p ~/.kubectl
+helm completion bash >~/.kubectl/helm.completion.bash.inc
 ```
 Inside `~/.bashrc` add:
 ```shell
@@ -54,7 +54,7 @@ complete -F __start_helm h
 Git repository is: https://github.com/ahmetb/kubectx.git.
 Run:
 ```shell
-$git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
+git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
 ```
 ### Enable bash completion
 Inside `~/.bashrc` add:
@@ -68,8 +68,8 @@ source $HOME/.kubectx/completion/kubectx.bash
 Git repository is: https://github.com/kvaps/kubectl-node-shell
 Run:
 ```shell
-$curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
-$sudo install kubectl-node_shell /usr/local/bin/
+curl -LO https://github.com/kvaps/kubectl-node-shell/raw/master/kubectl-node_shell
+sudo install kubectl-node_shell /usr/local/bin/
 ```
 
 # nfs-subdir-external-provisioner 
@@ -77,7 +77,7 @@ $sudo install kubectl-node_shell /usr/local/bin/
 Git repository is: [repository][nfs-provisioner-repo].
 A very useful readme can also be found [there][nfs-provisioner-readme].
 ```shell
-$helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
 ```
 ```text
 helm install my-release nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
@@ -87,20 +87,20 @@ helm install my-release nfs-subdir-external-provisioner/nfs-subdir-external-prov
 ```
 ### Uninstall
 ```shell
-$helm delete my-release
+helm delete my-release
 ```
 
 ### Examples
 #### Install
 On Ubuntu:
 ```shell
-$apt-get install nfs-common
+apt-get install nfs-common
 ```
 
 E.g.
 ```shell
-$kubectl create namespace nfs-provisioner
-$helm install -n nfs-provisioner nfs-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+kubectl create namespace nfs-provisioner
+helm install -n nfs-provisioner nfs-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
     --set nfs.server=bagend.slh \
     --set nfs.path=/volume1/k3s-nfs/ \
     --set storageClass.name=managed-nfs-storage \
@@ -110,12 +110,12 @@ $helm install -n nfs-provisioner nfs-provisioner nfs-subdir-external-provisioner
 
 #### Upgrade
 ```shell
-$helm upgrade -n nfs-provisioner nfs-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
+helm upgrade -n nfs-provisioner nfs-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
 ```
 
 #### Delete
 ```shell
-$helm delete -n nfs-provisioner nfs-provisioner
+helm delete -n nfs-provisioner nfs-provisioner
 ```
 
 #### Change default storage class
