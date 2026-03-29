@@ -1,0 +1,11 @@
+- name: "OpenWRT: Check if python3 is already installed"
+  become: false
+  raw: which python3
+  register: python_check
+  ignore_errors: true
+  changed_when: false
+
+- name: "OpenWRT: Update package list and install python3"
+  become: false
+  raw: apk update && apk add python3
+  when: python_check.rc != 0

@@ -1,0 +1,14 @@
+---
+- hosts: openwrt
+  name: "OpenWRT: Install Python3 (caution: gather_facts is set to false to avoid errors due to missing Python3)"
+  gather_facts: no
+  tasks:
+  - include_tasks: tasks/openwrt/install-openwrt-python3.yml
+
+- hosts: openwrt
+  name: "OpenWRT: Install SSH key and additional packages"
+  gather_facts: yes
+  tasks:
+  - include_tasks: tasks/add-ssh-key.yaml
+
+  - include_tasks: tasks/openwrt/install-openwrt-additional-packages.yaml

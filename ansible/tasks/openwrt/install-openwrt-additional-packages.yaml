@@ -1,0 +1,11 @@
+- name: "OpenWRT: Update package list and install additional packages"
+  become: false
+  package:
+    name:
+      - etherwake
+      - usbutils
+      - diffutils
+      - usteer
+      - luci-app-usteer
+    state: present
+    update_cache: yes
