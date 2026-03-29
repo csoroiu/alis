@@ -1,6 +1,6 @@
 - name: "OpenWRT: Update package list and install additional packages"
   become: false
-  package:
+  ansible.builtin.package:
     name:
       - etherwake
       - usbutils

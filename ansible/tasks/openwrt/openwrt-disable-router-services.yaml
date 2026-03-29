@@ -1,0 +1,8 @@
+- name: "OpenWRT: Disable DHCP (dnsmasq and odhcpd)"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: no
+    state: stopped
+  loop:
+    - dnsmasq
+    - odhcpd

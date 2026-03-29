@@ -3,5 +3,6 @@
   authorized_key:
     user: "{{ ansible_user }}"
     state: present
-    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
     path: "{{ authorized_keys_path | default(omit) }}"
+    manage_dir: yes

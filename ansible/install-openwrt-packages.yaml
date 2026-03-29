@@ -3,12 +3,24 @@
   name: "OpenWRT: Install Python3 (caution: gather_facts is set to false to avoid errors due to missing Python3)"
   gather_facts: no
   tasks:
-  - include_tasks: tasks/openwrt/install-openwrt-python3.yml
+    - include_tasks: tasks/openwrt/openwrt-ensure-prerequisites.yaml
 
 - hosts: openwrt
   name: "OpenWRT: Install SSH key and additional packages"
   gather_facts: yes
   tasks:
-  - include_tasks: tasks/add-ssh-key.yaml
+    - include_tasks: tasks/add-ssh-key.yaml
 
-  - include_tasks: tasks/openwrt/install-openwrt-additional-packages.yaml
+    - include_tasks: tasks/openwrt/install-openwrt-additional-packages.yaml
+
+- hosts: openwrt_router
+  name: "OpenWRT: Router: Enable router services"
+  gather_facts: yes
+  tasks:
+    - include_tasks: tasks/openwrt/openwrt-enable-router-services.yaml
+
+- hosts: openwrt:!openwrt_router
+  name: "OpenWRT: AP: Disable router services"
+  gather_facts: yes
+  tasks:
+    - include_tasks: tasks/openwrt/openwrt-disable-router-services.yaml
