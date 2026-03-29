@@ -1,0 +1,8 @@
+- name: "OpenWRT: Enable DHCP (dnsmasq and odhcpd)"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop:
+    - dnsmasq
+    - odhcpd

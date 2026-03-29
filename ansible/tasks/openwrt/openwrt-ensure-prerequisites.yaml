@@ -1,0 +1,24 @@
+- name: "OpenWRT: Check if apk exists"
+  ansible.builtin.raw: which apk
+  register: apk_check
+  check_mode: false
+  failed_when: false
+  changed_when: false
+
+- name: "Fail if apk is missing"
+  ansible.builtin.fail:
+    msg: "CRITICAL: The 'apk' package manager was not found on this host. Ensure this is an OpenWRT 25.12 or newer."
+  when: apk_check.rc != 0
+
+- name: "OpenWRT: Check if python3 is already installed"
+  ansible.builtin.raw: which python3
+  become: false
+  register: python_check
+  check_mode: false
+  failed_when: false
+  changed_when: false
+
+- name: "OpenWRT: Update package list and install python3"
+  ansible.builtin.raw: apk update && apk add python3
+  become: false
+  when: python_check.rc != 0
