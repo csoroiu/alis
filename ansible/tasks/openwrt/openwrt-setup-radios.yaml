@@ -1,0 +1,81 @@
+- name: Configure 2.4GHz Radio Settings - 802.11n
+  community.openwrt.uci:
+    command: set
+    config: wireless
+    section: "{{ radio_2g.radio }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: 'country', value: 'RO' }
+    - { key: 'cell_density', value: '2' }
+    - { key: 'htmode', value: 'HT40' }
+    - { key: 'channel', value: '1' }
+  when:
+    - radio_2g is not none
+    - radio_2g.max_capability == 'n'
+  register: uci_set_2g_n
+
+- name: Configure 2.4GHz Radio Settings - 802.11ax/be
+  community.openwrt.uci:
+    command: set
+    config: wireless
+    section: "{{ radio_2g.radio }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: 'country', value: 'RO' }
+    - { key: 'cell_density', value: '2' }
+    - { key: 'htmode', value: "{{ 'HE40' if radio_5g.max_capability == 'ax' else 'EHT40' }}"}
+    - { key: 'channel', value: '11' }
+  when:
+    - radio_2g is not none
+    - radio_2g.max_capability == 'ax' or radio_2g.max_capability == 'be'
+  register: uci_set_2g_ax
+
+- name: Configure 5GHz Radio Settings - 802.11n/ac
+  community.openwrt.uci:
+    command: set
+    config: wireless
+    section: "{{ radio_5g.radio }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: 'country', value: 'RO' }
+    - { key: 'cell_density', value: '3' }
+    - { key: 'htmode', value: "{{ 'VHT80' if radio_5g.max_capability == 'ac' else 'HT40' }}" }
+    - { key: 'channel', value: '52' }
+  when:
+    - radio_5g is not none
+    - radio_5g.max_capability == 'ac' or radio_5g.max_capability == 'n'
+  register: uci_set_5g_ac
+
+- name: Configure 5GHz Radio Settings - 802.11ax/802.11be
+  community.openwrt.uci:
+    command: set
+    config: wireless
+    section: "{{ radio_5g.radio }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: 'country', value: 'RO' }
+    - { key: 'cell_density', value: '3' }
+    - { key: 'htmode', value: "{{ 'HE80' if radio_5g.max_capability == 'ax' else 'EHT80' }}"}
+    - { key: 'channel', value: '100' }
+  when:
+    - radio_5g is not none
+    - radio_5g.max_capability == 'ax' or radio_5g.max_capability == 'be'
+  register: uci_set_5g_ax
+
+- name: Commit Wireless Changes
+  community.openwrt.uci:
+    command: commit
+    config: wireless
+  when: >
+    [
+      uci_set_2g_n, 
+      uci_set_2g_ax, 
+      uci_set_5g_ac,
+      uci_set_5g_ax,
+      uci_set_6g_ax,
+      uci_set_6g_be
+    ] | select('defined') | map(attribute='changed') is any

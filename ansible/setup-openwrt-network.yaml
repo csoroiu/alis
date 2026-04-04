@@ -1,0 +1,7 @@
+---
+- name: "OpenWRT: setup network"
+  hosts: openwrt
+  gather_facts: yes
+  tasks:
+    - include_tasks: tasks/openwrt/openwrt-init-radios.yaml
+    - include_tasks: tasks/openwrt/openwrt-setup-radios.yaml
