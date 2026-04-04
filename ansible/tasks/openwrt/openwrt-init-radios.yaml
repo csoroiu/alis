@@ -1,0 +1,53 @@
+- name: Identify Wireless Radios by Band
+  block:
+    - name: Query band for all wifi-devices
+      # Loops through devices and prints "band:device_name" (e.g., "2g:radio0", "5g:radio1")
+      ansible.builtin.raw: |
+        for dev in $(uci show wireless | grep "=wifi-device" | cut -d. -f2 | cut -d= -f1); do
+          band=$(uci -q get wireless.$dev.band)
+          phy=$(iwinfo nl80211 phyname $dev)
+        
+          # Detect max capability by checking 'iw phy' capabilities
+          capabilities=$(iw phy "$phy" info)
+          if echo "$capabilities" | grep -q "EHT PHY Capabilities"; then
+            max_capability="be"
+          elif echo "$capabilities" | grep -q "HE PHY Capabilities"; then
+            max_capability="ax"
+          elif echo "$capabilities" | grep -q "VHT Capabilities"; then
+            # 802.11ac (VHT) is 5GHz only; downgrade to 802.11n if on 2.4GHz
+            [ "$band" = "2g" ] && max_capability="n" || max_capability="ac"
+          elif echo "$capabilities" | grep -q "HT Capability overrides"; then
+            max_capability="n"
+          else
+            max_capability="legacy"
+          fi
+          [ -n "$band" ] && echo "$band:$dev:$phy:$max_capability"
+        done
+      register: radio_query
+      changed_when: false
+
+    - name: Print radio facts
+      ansible.builtin.debug:
+        msg:
+          - "Radio's found: {{ radio_query.stdout_lines }}"
+
+    - name: Set radio facts
+      ansible.builtin.set_fact:
+        "radio_{{ item }}": >-
+          {{ 
+            {
+              'radio': match.split(':')[1], 
+              'phy': match.split(':')[2],
+              'max_capability': match.split(':')[3]
+            } if match else None 
+          }}
+      vars:
+        match: "{{ radio_query.stdout_lines | select('search', item + ':') | first | default('') }}"
+      loop: [ '2g', '5g', '6g' ]
+
+    - name: Display results
+      ansible.builtin.debug:
+        msg:
+          - "2.4GHz: Radio={{ radio_2g.radio | default('N/A') }}, Phy={{ radio_2g.phy | default('N/A') }}, Max capability={{ radio_2g.max_capability | default('N/A') }}"
+          - "5GHz:   Radio={{ radio_5g.radio | default('N/A') }}, Phy={{ radio_5g.phy | default('N/A') }}, Max capability={{ radio_5g.max_capability | default('N/A') }}"
+          - "6GHz:   Radio={{ radio_6g.radio | default('N/A') }}, Phy={{ radio_6g.phy | default('N/A') }}, Max capability={{ radio_6g.max_capability | default('N/A') }}"
