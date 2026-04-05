@@ -3,7 +3,7 @@ readonly PROGNAME=$(basename "$0")
 readonly PROGDIR="$(dirname -- "$(readlink -f -- "$0")")"
 readonly ARGS=("$@")
 
-UBUNTU_CORE_VERSION=${UBUNTU_CORE_VERSION:=22}
+UBUNTU_CORE_VERSION=${UBUNTU_CORE_VERSION:=24}
 
 if [[ $# -ne 2 ]]; then
     echo "Invalid arguments provided."

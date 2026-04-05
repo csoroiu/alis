@@ -1,0 +1,5 @@
+label: dos
+#label-id: 0x00000000
+unit: sectors
+
+start=4M,type=7,bootable

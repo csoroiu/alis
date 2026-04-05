@@ -1,0 +1,6 @@
+label: dos
+#label-id: 0x00000000
+unit: sectors
+
+start=4M,size=256M,type=c,bootable
+start=260M,type=83
