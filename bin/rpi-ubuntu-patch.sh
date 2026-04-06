@@ -24,6 +24,8 @@ echo ""
 echo "Patching files"
 touch boot/ssh
 
+sed -e 's/^ssh_pwauth: false/ssh_pwauth: true/' -i boot/user-data
+
 cp -a root/etc/locale.gen root/etc/locale.gen.original
 uncomment_line "^#en_US" root/etc/locale.gen
 
